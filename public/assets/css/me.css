@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;0,700;1,500&family=Rubik:wght@300;400;500;600;700;800;900&display=swap");
+.btn {
+    border: none;
+}
+
+th {
+    font-size: 13px;
+}
+
+td {
+    font-size: 12px;
+    text-align: center;
+}
+
+.filter {
+    display: none;
+    flex-direction: row;
+}
+
+#filter-active {
+    font-size: 12px;
+}
+
+.filterPMI {
+    font-size: 12px;
+}
+
+.detailed {
+    font-family: "Poppins", sans-serif;
+}
+
+.label {
+    display: inline-block;
+    text-align: right;
+}
+
+.value {
+    display: inline-block;
+}
+
+.detailed_text {
+    font-family: "Poppins", sans-serif;
+    font-size: 10px;
+    color: red;
+}

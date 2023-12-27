@@ -105,6 +105,8 @@
 <script src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
 
 <script>
+  var type = '{{ $type }}';
+  var status = '{{ $status }}';
   var downloadPkRoute = "{{ route('download.bpjs', ['id' => ':id', 'document' => 'pk']) }}";
   var downloadPasportRoute = "{{ route('download.bpjs', ['id' => ':id', 'document' => 'pasport']) }}";
   var downloadVisaRoute = "{{ route('download.bpjs', ['id' => ':id', 'document' => 'visa']) }}";
@@ -124,7 +126,9 @@
        serverSide: true,
        info: false,
        ajax: {
-        url: '/api/users/' ,
+        url: '{{ route("dashboard.indexGet", ["type" => ":type", "status" => ":status"]) }}'
+                .replace(':type', type)
+                .replace(':status', status),
          type: 'GET',
          data: function (d) {
            d.keyword = $('#search').val();
@@ -185,9 +189,9 @@
             return combinedInfo;
            },
          },
-         { data: 'no_telp' },
          { data: 'status' },
          { data: 'status_medical' },
+         { data: 'status_penerbangan' },
          { data: 'tempat_lahir' },
   
          {

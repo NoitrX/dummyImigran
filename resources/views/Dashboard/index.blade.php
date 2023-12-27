@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="text-nowrap">
-                    <form action="{{ route('dashboard.indexGet', [ 'type' => 'medical', 'status' => 'status'])}}" method="GET">
+                    <form action="{{ route('dashboard.viewFilter', [ 'type' => 'medical', 'status' => 'status'])}}" method="GET">
                         @csrf
                         <button type="submit" class="btn btn-primary btn-sm rounded-0">LIHAT DATA</button>
                     </form>
@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 <div class="text-nowrap">
-                    <form action="{{ route('dashboard.indexGet', [ 'type' => 'blkln', 'status' => 'status'])}}" method="GET">
+                    <form action="{{ route('dashboard.viewFilter', [ 'type' => 'blkln', 'status' => 'status'])}}" method="GET">
                         @csrf
                         <button type="submit" class="btn btn-primary btn-sm rounded-0">LIHAT DATA</button>
                     </form>
@@ -91,7 +91,7 @@
                     </div>
                 </div>
                 <div class="text-nowrap">
-                    <form action="{{ route('dashboard.indexGet', [ 'type' => 'rekompassport' , 'status' => 'status'])}}" method="GET">
+                    <form action="{{ route('dashboard.viewFilter', [ 'type' => 'rekompassport' , 'status' => 'status'])}}" method="GET">
                         @csrf
                         <button type="submit" class="btn btn-primary btn-sm rounded-0">LIHAT DATA</button>
                     </form>
@@ -117,7 +117,7 @@
                     </div>
                 </div>
                 <div class="text-nowrap">
-                    <form action="{{ route('dashboard.indexGet', [ 'type' => 'terbang', 'status' => 'status_penerbangan'])}}" method="GET">
+                    <form action="{{ route('dashboard.viewFilter', [ 'type' => 'terbang', 'status' => 'status_penerbangan'])}}" method="GET">
                         @csrf
                         <button type="submit" class="btn btn-primary btn-sm rounded-0">LIHAT DATA</button>
                     </form>
@@ -142,7 +142,7 @@
                     </div>
                 </div>
                 <div class="text-nowrap">
-                    <form action="{{ route('dashboard.indexGet', [ 'type' => 'belum_terbang', 'status' => 'status_penerbangan'])}}" method="GET">
+                    <form action="{{ route('dashboard.viewFilter', [ 'type' => 'belum_terbang', 'status' => 'status_penerbangan'])}}" method="GET">
                         @csrf
                         <button type="submit" class="btn btn-primary btn-sm rounded-0">LIHAT DATA</button>
                     </form>
@@ -168,7 +168,7 @@
                     </div>
                 </div>
                 <div class="text-nowrap">
-                    <form action="{{ route('dashboard.indexGet', [ 'type' => 'fit', 'status' => 'status_medical'])}}" method="GET">
+                    <form action="{{ route('dashboard.viewFilter', [ 'type' => 'fit', 'status' => 'status_medical'])}}" method="GET">
                         @csrf
                         <button type="submit" class="btn btn-primary btn-sm rounded-0">LIHAT DATA</button>
                     </form>
@@ -194,7 +194,7 @@
                     </div>
                 </div>
                 <div class="text-nowrap">
-                    <form action="{{ route('dashboard.indexGet', [ 'type' => 'non_fit', 'status' => 'status_medical'])}}" method="GET">
+                    <form action="{{ route('dashboard.viewFilter', [ 'type' => 'non_fit', 'status' => 'status_medical'])}}" method="GET">
                         @csrf
                         <button type="submit" class="btn btn-primary btn-sm rounded-0">LIHAT DATA</button>
                     </form>
@@ -220,7 +220,7 @@
                     </div>
                 </div>
                 <div class="text-nowrap">
-                    <form action="{{ route('dashboard.indexGet', [ 'type' => 'non_approved', 'status' => 'status_akun'])}}" method="GET">
+                    <form action="{{ route('dashboard.viewFilter', [ 'type' => 'non_approved', 'status' => 'status_akun'])}}" method="GET">
                         @csrf
                         <button type="submit" class="btn btn-primary btn-sm rounded-0">LIHAT DATA</button>
                     </form>

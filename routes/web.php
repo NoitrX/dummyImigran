@@ -58,6 +58,7 @@ Route::prefix('/api/users')->group(function() {
 Route::prefix('dashboard')->group(function() {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index')->middleware(['auth:admin,web']);
     Route::get('/{type}/{status}', [DashboardController::class, 'indexGet'])->name('dashboard.indexGet')->middleware(['auth:admin,web']);
+    Route::get('/viewFilter/{type}/{status}', [DashboardController::class, 'viewFilter'])->name('dashboard.viewFilter')->middleware(['auth:admin,web']);
 });
 
 Route::prefix('users-nonapproved')->group(function() {

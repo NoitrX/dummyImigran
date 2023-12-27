@@ -13,7 +13,7 @@ class UserSelesaiRepository {
         try {
             $query = User::with(['createdByUser', 'updatedByUser'])->where('users.status_akhir', '=', 'selesai')
             ->select('users.name', 'users.tempat_lahir','users.tanggal_lahir', 'users.negara', 'users.no_telp', 'users.jabatan', 'users.status', 'users.created_by', 'users.updated_by',
-            'users.created_at','users.updated_at', 'users.id', 'users.pasport', 'users.pk', 'users.visa', 'users.nama_bapak');
+            'users.created_at','users.updated_at', 'users.id', 'users.pasport', 'users.pk', 'users.visa', 'users.nama_bapak', 'users.status_penerbangan');
             
              if ($keyword) {
                 $query->where(function($query) use ($keyword) {
@@ -50,6 +50,14 @@ class UserSelesaiRepository {
         {
             throw new Exception($e->getMessage());
         }
+    }
+
+    public function setTerbang(Request $request,$id)
+    {
+        $users = User::find($id);
+        $users->update(['status_penerbangan' => 'terbang']);
+
+        return $users;
     }
 }
 ?>

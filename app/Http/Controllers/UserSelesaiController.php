@@ -44,4 +44,17 @@ class UserSelesaiController extends Controller
          }
 
     }
+
+    public function setTerbang(Request $request,$id)
+    {
+        try {
+            $dataId = $this->userSelesaiRepository->setTerbang($request, $id);
+            return redirect('/users-selesai')->with('success', 'PMI Sudah Terbang!.');
+        }catch(Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage(),
+                'status' => 500 
+            ], 500);
+        }
+    }
 }

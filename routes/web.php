@@ -57,6 +57,7 @@ Route::prefix('/api/users')->group(function() {
 
 Route::prefix('dashboard')->group(function() {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index')->middleware(['auth:admin,web']);
+    Route::get('/{type}/{status}', [DashboardController::class, 'indexGet'])->name('dashboard.indexGet')->middleware(['auth:admin,web']);
 });
 
 Route::prefix('users-nonapproved')->group(function() {
@@ -90,6 +91,7 @@ Route::prefix('users-selesai')->group(function() {
 
 Route::prefix('/api/users-selesai')->group(function() {
     Route::get('/', [UserSelesaiController::class, 'indexApi'])->name('user-selesai.indexApi')->middleware(['auth:admin,web']);
+    Route::post('/setTerbang/{id}', [UserSelesaiController::class, 'setTerbang'])->name('user-selesai.setTerbang')->middleware(['auth:admin,web']);
 });
 
 Route::prefix('admin')->group(function() {

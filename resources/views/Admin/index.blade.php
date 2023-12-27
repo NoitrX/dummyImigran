@@ -121,12 +121,6 @@
                 </div>
             </div>
     
-            <div class="col-lg-12 col-sm-12 col-12">
-              <div class="form-group">
-                  <label>Password <span style="color: red">*</span> </label>
-                  <input type="text" value="" class="form-control" id="password" placeholder="Password" name="password">
-              </div>
-          </div>
           
       </div>
       <div class="modal-footer">

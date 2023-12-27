@@ -60,6 +60,7 @@
             <label>Status Medical <span style="color: red">*</span> </label>
             <select name="status_medical" class="form-control" id="">
                 <option value="{{$users->status_medical}}">{{$users->status_medical}}</option>
+                <option value="==||==">==||==</option>
                 <option value="fit">FIT</option>
                 <option value="non_fit">NON FIT</option>
             </select>

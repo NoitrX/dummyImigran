@@ -50,7 +50,7 @@
             </div>
 
             <div class="col-md-4 mb-2">
-                <label for="namaLengkap" class="form-label" >Nama Bapak</label>
+                <label for="namaLengkap" class="form-label" >Nama Ayah</label>
                 <input type="text" name="nama_bapak" value="{{ old('nama_bapak') }}" class="form-control rounded-0 @error('nama_bapak') is-invalid @enderror" id="namaBapak" placeholder="Isi Nama Bapak" autocomplete="off">
                 @error('nama_bapak')
                 <div class=" detailed_text">{{ $message }}</div>

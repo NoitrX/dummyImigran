@@ -61,7 +61,6 @@ class AdminRepository {
         $saranaKes = Admin::where('id', $id)->first();
         $input = [
             'email' => $request->email,
-            'password' => Hash::make($request->password),
         ];
 
         $saranaKes->update($input);

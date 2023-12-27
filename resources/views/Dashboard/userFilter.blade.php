@@ -1,12 +1,13 @@
 @extends('Layouts.main')
-@section('title', 'PMI SELESAI | PMI')
+@section('title', 'LIST | PMI')
 
 @section('content')
 <div class="row">
   <div class="col-12">
     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-      <h4 class="mb-sm-0 font-size-18">DAFTAR PMI SELESAI</h4>
+      <h4 class="mb-sm-0 font-size-18">DAFTAR PMI</h4>
       <button class="btn btn-primary " id="filter-active"> <i class="fas fa-filter"></i> FILTER DATA</button>
+      <button class="btn btn-primary  rounded-0"  data-bs-toggle="modal" data-bs-target="#modalTambah"> <i class="fas fa-plus"></i> Tambah Data</button>
     </div>
   </div>
 </div>
@@ -16,9 +17,9 @@
   <div class="col-12">
     <div class="card">
       <div class="card-header">
-        <h4 class="card-title">DAFTAR PMI SELESAI</h4>
+        <h4 class="card-title">DAFTAR PMI</h4>
         <div class="d-flex justify-content-between">
-          <p class="card-title-desc">Berikut ini adalah Daftar Para PMI yang telah selesai </p>
+          <p class="card-title-desc">Berikut ini adalah Daftar Para PMI dengan beberapa Proses yang sudah dijalani</p>
           <div>
             <a href="#" class="btn btn-danger btn-sm"  id="deleteAllSelectedRecord" style="display: none;"><i class="fas fa-trash mx-1"></i> Delete All</a>
             <a href="" class="btn btn-success btn-sm rounded-0"> <i class="fa-solid fa-file-excel"></i> Export </a>
@@ -71,8 +72,8 @@
               <th class="text-center">NEGARA</th>
               <th class="text-center">JABATAN</th>
               <th class="text-center">TTL</th>
-              <th class="text-center">NO TELP</th>
               <th class="text-center">STATUS</th>
+              <th class="text-center">STATUS MEDICAL</th>
               <th class="text-center">STATUS PENERBANGAN</th>
               <th class="text-center">KANDEPNAKER</th>
               <th class="text-center">PK</th>
@@ -95,6 +96,7 @@
    
   </div>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
@@ -122,7 +124,7 @@
        serverSide: true,
        info: false,
        ajax: {
-         url: '/api/users-selesai',
+        url: '/api/users/' ,
          type: 'GET',
          data: function (d) {
            d.keyword = $('#search').val();
@@ -136,8 +138,9 @@
           return response.data;
          },
          initComplete: function(settings, json) {
-     console.log('DataTables initialization complete. JSON response:', json);
- }
+              console.log('DataTables initialization complete. JSON response:', json);
+          } 
+ 
         
        },
  
@@ -156,33 +159,24 @@
              var getUrlStore = "{{ url('users/store') }}";
              var getUrlDetail = "{{ url('users/') }}";
              var deleteUrl = "{{ url('api/users/delete')}}"
-             var approveUrl = "{{ url('/api/users-selesai/setTerbang')}}"
+             var approveUrl = "{{ url('/api/users/setComplete')}}"
              var btn = `<div class="d-flex">
-                             <form action="${approveUrl}/${row.id}" id="complete-form" class="mx-1 complete-form" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-success rounded-0 btn-sm" id="btn-completed">
-                                  <i class="fa-solid fa-check"></i>
-                                </button>
-                             </form>
-                           <a class="btn btn-primary btn-sm text-white rounded-0 mx-1" href="${getUrlDetail}/${row.id}">
+                    
+                       <a class="btn btn-primary btn-sm text-white rounded-0 mx-1" href="${getUrlDetail}/${row.id}">
                              <i class="fas fa-eye"></i>
                            </a>
-                           
-                           <form action="${deleteUrl}/${row.id}" class="mx-1 delete-form" method="POST">
-                             @method('delete')
-                             @csrf
-                             <button type="submit" class="btn btn-danger rounded-0 btn-sm delete-btn">
-                               <i class="fas fa-trash"></i>
-                             </button>
-                           </form>
                          </div>`;
              return btn;
            },
          },
-         { data: 'name', render:function(data,type,row) {
-          var combinedInfo = row.name + ' Binti ' + row.nama_bapak;
-          return combinedInfo
-         } },
+         {
+            data: 'name',
+            render: function (data, type, row) {
+            var combinedInfo = row.name + ' Binti ' + row.nama_bapak;
+             var textColor = row.status_medical === 'non_fit' ? 'red' : (row.status_medical === 'fit' ? 'green' : ''); 
+             return '<span style="color:' + textColor + '">' + combinedInfo + '</span>';
+          }
+        },
          { data: 'negara' },
          { data: 'jabatan' },
          {
@@ -193,7 +187,7 @@
          },
          { data: 'no_telp' },
          { data: 'status' },
-         { data: 'status_penerbangan' },
+         { data: 'status_medical' },
          { data: 'tempat_lahir' },
   
          {
@@ -320,6 +314,44 @@
     }
   }
 
+  $(document).ready(function() {
+          $('#addDataForm').submit(function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+
+            $.ajax({
+              url: $(this).attr('action'),
+              type: 'POST',
+              data: formData,
+              processData: false,
+              contentType: false,
+              success:function(response) {
+                $('#modalTambah').modal('hide');
+                $('#addDataForm')[0].reset();
+                iziToast.success({
+                  title: 'Sukses',
+                        message: 'Data Berhasil Ditambahkan!!.',
+                        position: 'topRight',
+                });
+                loadTableData()
+              },
+              error: function(xhr,status,error) {
+                console.error(xhr);
+                    var errorMessage = 'Error:';
+                    $.each(xhr.responseJSON.errors, function(key, value) {
+                        errorMessage += '\n- ' + value;
+                    });
+
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'Form wajib Diisi!',
+                        position: 'topRight',
+                    });
+              }
+            })
+          })
+        })
+        loadTableData()
 
   $('#search').on('keyup', function() {
         dataTable.search(this.value).draw();
@@ -377,7 +409,7 @@
                 },
                 success: function(response) {
                     $.each(all_ids, function(key,val) {
-                        window.location.href = '/users-selesai';
+                        window.location.href = '/users';
                     })
                    
                         
@@ -390,27 +422,6 @@
         })
     })
 
-    $(document).ready(function() {
-          $('#complete-form').submit(function(e) {
-            e.preventDefault();
-            var dataForm = new FormData(this);
-
-            $.ajax({
-              url: $(this).attr('action'),
-              type: 'POST',
-              data: dataForm,
-              processData: false,
-              contentType: false,
-              success: function(response) {
-
-                loadDataTable()
-              },
-              error: function(xhr,status,error) {
-                console.error(xhr)
-              }
-            })
-          })
-        })
 
    $(document).on('click', '.delete-btn', function (e) {
         e.preventDefault();
@@ -443,6 +454,12 @@
         iziToast.success({
             title: 'Success',
             message: '{{ session('oke') }}',
+            position: 'topRight',
+        });
+        @elseif(session('error'))
+        iziToast.error({
+            title: 'Success',
+            message: '{{ session('error') }}',
             position: 'topRight',
         });
     @endif

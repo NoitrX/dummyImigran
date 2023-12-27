@@ -41,6 +41,7 @@
               <p><span class="label fw-bold">No KK :</span> <span class="value">{{$userId->no_kk}}</span></p>
               <p><span class="label fw-bold">No NIK :</span> <span class="value">{{$userId->no_nik}}</span></p>
               <p><span class="label fw-bold">Negara :</span> <span class="value">{{$userId->negara}}</span></p>
+              <p><span class="label fw-bold">Status Penerbangan :</span> <span class="value"> {{ $userId->status_penerbangan }}</span></p>
           </div>
 
           <div class="col-lg-3 mt-4 detailed">
@@ -54,13 +55,15 @@
             <p><span class="label fw-bold">No Telp :</span> <span class="value">{{$userId->no_telp}}</span></p>
             <p><span class="label fw-bold">No KK :</span> <span class="value">{{$userId->no_kk}}</span></p>
             <p><span class="label fw-bold">Medical :</span> <span class="value"> {{ $userId->saranaKesehatan->nama_sarana ?? 'Data Kosong' }}</span></p>
+            <p><span class="label fw-bold">Status Medical :</span> <span class="value"> {{ $userId->status_medical }}</span></p>
+     
         </div>
             <div class="col-lg-12 text-center mt-5">
               <h3 class="fw-bold detailed">DOKUMEN PENDUKUNG</h3>
             </div>
 
           @csrf
-          <div class="col-lg-4 mt-3">
+          <div class="col-lg-4 ">
               <label for="">BPJS</label>
               <div class="d-flex">
                   <input type="text" class="form-control" value="{{ $userId->bpjs }}" readonly>

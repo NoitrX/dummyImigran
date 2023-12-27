@@ -74,6 +74,7 @@
               <th class="text-center">TTL</th>
               <th class="text-center">NO TELP</th>
               <th class="text-center">STATUS</th>
+              <th class="text-center">STATUS MEDICAL</th>
               <th class="text-center">KANDEPNAKER</th>
               <th class="text-center">PK</th>
               <th class="text-center">PASPOR</th>
@@ -165,6 +166,22 @@
                   <div class=" detailed_text">{{ $message }}</div>
               @enderror
               </div>
+
+              <div class="col-lg-3 col-sm-6 col-12">
+                <div class="form-group">
+                    <label>Negara <span style="color: red">*</span> </label>
+                    <select name="negara" class="form-control" id="">
+                        <option value="ARAB SAUDI">ARAB SAUDI</option>
+                        <option value="TAIWAN">TAIWAN</option>
+                        <option value="JEPANG">JEPANG</option>
+                        <option value="KUWAIT">KUWAIT</option>
+                        <option value="MALAYSIA">MALAYSIA</option>
+                        <option value="BRUNEI DARUSSALAM">BRUNEI DARUSSALAM</option>
+                        <option value="SINGAPURA">SINGAPURA</option>
+                        <option value="BAHREN">BAHREN</option>
+                    </select>
+                </div>
+            </div>
               <div class="col-md-6 mb-2">
                   <label for="" class="form-label">No KK</label>
                   <input type="number" name="no_kk" value="{{ old('no_kk') }}" class="form-control rounded-0 @error('no_kk') is-invalid @enderror"  placeholder="Isi Nomor KK">
@@ -313,8 +330,9 @@
           return response.data;
          },
          initComplete: function(settings, json) {
-     console.log('DataTables initialization complete. JSON response:', json);
- }
+              console.log('DataTables initialization complete. JSON response:', json);
+          } 
+ 
         
        },
  
@@ -360,10 +378,14 @@
              return btn;
            },
          },
-         { data: 'name', render:function(data,type,row) {
-          var combinedInfo = row.name + ' Binti ' + row.nama_bapak;
-          return combinedInfo
-         } },
+         {
+            data: 'name',
+            render: function (data, type, row) {
+            var combinedInfo = row.name + ' Binti ' + row.nama_bapak;
+             var textColor = row.status_medical === 'non_fit' ? 'red' : (row.status_medical === 'fit' ? 'green' : ''); 
+             return '<span style="color:' + textColor + '">' + combinedInfo + '</span>';
+          }
+        },
          { data: 'negara' },
          { data: 'jabatan' },
          {
@@ -374,6 +396,7 @@
          },
          { data: 'no_telp' },
          { data: 'status' },
+         { data: 'status_medical' },
          { data: 'tempat_lahir' },
   
          {

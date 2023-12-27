@@ -43,3 +43,7 @@ td {
     font-size: 10px;
     color: red;
 }
+
+.non-fit-row {
+    background-color: yellow !important; /* Important to override DataTables styles */
+}

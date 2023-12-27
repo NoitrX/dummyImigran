@@ -18,7 +18,7 @@ class userRepository {
             $query = User::with(['createdByUser', 'updatedByUser'])->where('users.status_akun', '=', 'approved')
             ->where('users.status_akhir', '=', 'belum_selesai')
             ->select('users.name', 'users.tempat_lahir','users.tanggal_lahir', 'users.negara', 'users.no_telp', 'users.jabatan', 'users.status', 'users.created_by', 'users.updated_by',
-            'users.created_at','users.updated_at', 'users.id', 'users.pasport', 'users.pk', 'users.visa', 'users.nama_bapak');
+            'users.created_at','users.updated_at', 'users.id', 'users.pasport', 'users.pk', 'users.visa', 'users.nama_bapak', 'users.status_medical');
             
              if ($keyword) {
                 $query->where(function($query) use ($keyword) {
@@ -85,6 +85,7 @@ class userRepository {
                'visa' => $request->visa,
                'ektkln' => $request->ektkln,
                'status' => $request->status,
+               'status_medical' => $request->status_medical
               
             ];
             if($request->hasFile('medical')) {
@@ -430,7 +431,8 @@ class userRepository {
             'no_surat_izin' => $request->no_surat_izin,
             'doc_kk' => $request->doc_kk,
             'doc_akta' => $request->doc_akta,
-            'status_akun' => 'non_approved'
+            'status_akun' => 'non_approved',
+            'negara' => $request->negara
         ];
 
         if (!empty($input['tanggal_lahir'])) {

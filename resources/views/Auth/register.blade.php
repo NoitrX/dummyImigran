@@ -86,7 +86,14 @@
             </div>
             <div class="col-md-6 mb-2">
                 <label for="" class="form-label">Agama</label>
-                <input type="text" name="agama" value="{{ old('agama') }}" class="form-control rounded-0 @error('agama') is-invalid @enderror"   placeholder="Isi Agama" autocomplete="off">
+                <select name="agama" class="form-control" id="">
+                    <option value="ISLAM">ISLAM</option>
+                    <option value="KRISTEN">KRISTEN</option>
+                    <option value="KATOLIK">KATOLIK</option>
+                    <option value="BUDDHA">BUDDHA</option>
+                    <option value="HINDU">HINDU</option>
+                    <option value="KONGHUCHU">KONGHUCHU</option>
+                </select>
                 @error('agama')
                 <div class=" detailed_text">{{ $message }}</div>
             @enderror
@@ -134,7 +141,25 @@
                 <div class="text-danger detailed_text">{{ $message }}</div>
             @enderror
             </div>
+
             <div class="col-md-6 mb-2">
+                <label for="" class="form-label">Negara</label>
+                <select name="negara" class="form-control rounded-0 @error('negara') is-invalid @enderror" >
+                    <option value="hidden">------ Pilih Opsi -----</option>
+                    <option value="ARAB SAUDI">ARAB SAUDI</option>
+                    <option value="TAIWAN">TAIWAN</option>
+                    <option value="JEPANG">JEPANG</option>
+                    <option value="KUWAIT">KUWAIT</option>
+                    <option value="MALAYSIA">MALAYSIA</option>
+                    <option value="BRUNEI DARUSSALAM">BRUNEI DARUSSALAM</option>
+                    <option value="SINGAPURA">SINGAPURA</option>
+                    <option value="BAHREN">BAHREN</option>
+                </select>
+                @error('negara')
+                <div class="text-danger detailed_text">{{ $message }}</div>
+            @enderror
+            </div>
+            <div class="col-md-4 mb-2">
                 <label for="" class="form-label">Status Menikah</label>
                 <select name="status_menikah" class="form-control rounded-0 @error('status_menikah') is-invalid @enderror"  >
                     <option value="hidden">------ Pilih Opsi -----</option>
@@ -161,7 +186,7 @@
             @enderror
             </div>
            
-            <div class="col-md-4 mb-2">
+            <div class="col-md-6 mb-2">
                 <label for="" class="form-label">Upload Foto</label>
                 <input type="file" name="foto" class="form-control rounded-0 @error('foto') is-invalid @enderror" >
                 @error('foto')
@@ -178,7 +203,7 @@
             @enderror
             </div>
 
-            <div class="col-md-6 mb-2">
+            <div class="col-md-12 mb-2">
                 <label for="" class="form-label">Upload Akta Kelahiran</label>
                 <input type="file" name="doc_akta" class="form-control rounded-0 @error('doc_akta') is-invalid @enderror" >
                 @error('doc_akta')

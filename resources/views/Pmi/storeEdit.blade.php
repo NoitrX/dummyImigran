@@ -55,6 +55,16 @@
         </div>
         </div>
 
+        <div class="col-lg-3 col-sm-6 col-12">
+            <div class="form-group">
+            <label>Status Medical <span style="color: red">*</span> </label>
+            <select name="status_medical" class="form-control" id="">
+                <option value="{{$users->status_medical}}">{{$users->status_medical}}</option>
+                <option value="fit">FIT</option>
+                <option value="non_fit">NON FIT</option>
+            </select>
+            </div>
+            </div>
     
     <div class="col-lg-3 col-sm-6 col-12 mt-1">
     <div class="form-group">
@@ -179,7 +189,7 @@
         </div>
     </div>
     </div>
-    <div class="col-lg-3 col-sm-6 col-12 mt-2">
+    <div class="col-lg-6 col-sm-6 col-12 mt-2">
         <div class="form-group">
         <label>PK <span style="color: red">*</span> </label>
         <input type="file" value="{{$users->pk}}" class="form-control" name="pk" id="pkInput">
@@ -212,7 +222,7 @@
         </div>
     </div>
     </div>
-    <div class="col-lg-12 col-sm-6 col-12 mt-2">
+    <div class="col-lg-6 col-sm-6 col-12 mt-2">
     <div class="form-group">
     <label> Status <span style="color: red">*</span> </label>
     <select class="form-control" name="status">

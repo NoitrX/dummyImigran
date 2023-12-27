@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\SaranaKesehatanController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserNonApproveController;
@@ -46,6 +47,8 @@ Route::prefix('users')->group(function() {
     Route::get('/download-merged-pdf/{id}', [UserController::class, 'downloadMergedPDF'])->name('download.merged.pdf')->middleware(['auth:admin,web']);
     Route::post('/addData', [UserController::class, 'addData'])->name('user.addData')->middleware(['auth:admin,web']);
 });
+
+Route::get('/pmi-excel/{status}', [ExportController::class, 'exportNew'])->name('pmi.exportExcel')->middleware(['auth:admin,web']);
 
 Route::prefix('/api/users')->group(function() {
     Route::get('/', [UserController::class, 'indexApi'])->name('user.indexApi')->middleware(['auth:admin,web']);
@@ -107,4 +110,6 @@ Route::prefix('/api/admin')->group(function() {
     Route::delete('/delete/{id}', [AdminController::class, 'deleteApi'])->name('admin.deleteApi')->middleware(['auth:admin,web']);
     Route::delete('/deleteAll', [AdminController::class, 'deleteAll'])->name('admin.deleteAll')->middleware(['auth:admin,web']);
 });
+
+
 

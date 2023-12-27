@@ -7,7 +7,6 @@
     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
       <h4 class="mb-sm-0 font-size-18">DAFTAR PMI</h4>
       <button class="btn btn-primary " id="filter-active"> <i class="fas fa-filter"></i> FILTER DATA</button>
-      <button class="btn btn-primary  rounded-0"  data-bs-toggle="modal" data-bs-target="#modalTambah"> <i class="fas fa-plus"></i> Tambah Data</button>
     </div>
   </div>
 </div>
@@ -21,8 +20,7 @@
         <div class="d-flex justify-content-between">
           <p class="card-title-desc">Berikut ini adalah Daftar Para PMI dengan beberapa Proses yang sudah dijalani</p>
           <div>
-            <a href="#" class="btn btn-danger btn-sm"  id="deleteAllSelectedRecord" style="display: none;"><i class="fas fa-trash mx-1"></i> Delete All</a>
-            <a href="" class="btn btn-success btn-sm rounded-0"> <i class="fa-solid fa-file-excel"></i> Export </a>
+
           </div>
          
         </div>

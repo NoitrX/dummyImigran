@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -124,10 +125,13 @@ class AuthController extends Controller
         }catch(Exception $e)
         {
             $e;
-        }
+        }  
+    }
+    public function checkEmail($email, $id = null) {
+        $check = User::where('email', $email);
+        if($id) $check = $check->where('id', '!=', $id);
+        $check = $check->first();
 
-      
-       
-       
+        if ($check) throw ValidationException::withMessages(['email' => 'Email sudah ada']);
     }
 }

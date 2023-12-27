@@ -21,7 +21,7 @@
           <p class="card-title-desc">Berikut ini adalah Daftar Para PMI yang telah selesai </p>
           <div>
             <a href="#" class="btn btn-danger btn-sm"  id="deleteAllSelectedRecord" style="display: none;"><i class="fas fa-trash mx-1"></i> Delete All</a>
-            <a href="" class="btn btn-success btn-sm rounded-0"> <i class="fa-solid fa-file-excel"></i> Export </a>
+            <a href="{{ route('pmi.exportExcel', ['status' => 'selesai'])}}" class="btn btn-success btn-sm rounded-0"> <i class="fa-solid fa-file-excel"></i> Export </a>
           </div>
          
         </div>
@@ -157,13 +157,15 @@
              var getUrlDetail = "{{ url('users/') }}";
              var deleteUrl = "{{ url('api/users/delete')}}"
              var approveUrl = "{{ url('/api/users-selesai/setTerbang')}}"
+             var isTerbang = row.status_penerbangan === 'terbang';
+             var buttonDisabledAttribute = isTerbang ? 'disabled' : '';
              var btn = `<div class="d-flex">
-                             <form action="${approveUrl}/${row.id}" id="complete-form" class="mx-1 complete-form" method="POST">
+                          <form action="${approveUrl}/${row.id}" id="complete-form" class="mx-1 complete-form" method="POST">
                                 @csrf
-                                <button type="submit" class="btn btn-success rounded-0 btn-sm" id="btn-completed">
-                                  <i class="fa-solid fa-check"></i>
+                                <button type="submit" class="btn btn-success rounded-0 btn-sm" id="btn-completed" ${buttonDisabledAttribute}>
+                                    <i class="fa-solid fa-check"></i>
                                 </button>
-                             </form>
+                            </form>
                            <a class="btn btn-primary btn-sm text-white rounded-0 mx-1" href="${getUrlDetail}/${row.id}">
                              <i class="fas fa-eye"></i>
                            </a>

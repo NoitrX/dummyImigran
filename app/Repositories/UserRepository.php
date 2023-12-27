@@ -18,7 +18,7 @@ class userRepository {
             $query = User::with(['createdByUser', 'updatedByUser'])->where('users.status_akun', '=', 'approved')
             ->where('users.status_akhir', '=', 'belum_selesai')
             ->select('users.name', 'users.tempat_lahir','users.tanggal_lahir', 'users.negara', 'users.no_telp', 'users.jabatan', 'users.status', 'users.created_by', 'users.updated_by',
-            'users.created_at','users.updated_at', 'users.id', 'users.pasport', 'users.pk', 'users.visa', 'users.nama_bapak', 'users.status_medical');
+            'users.created_at','users.updated_at', 'users.id', 'users.pasport', 'users.pk', 'users.visa', 'users.nama_bapak', 'users.status_medical')->orderBy('name', 'asc');
             
              if ($keyword) {
                 $query->where(function($query) use ($keyword) {

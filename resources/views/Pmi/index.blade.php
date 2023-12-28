@@ -75,7 +75,7 @@
               <th class="text-center">NO TELP</th>
               <th class="text-center">STATUS</th>
               <th class="text-center">STATUS MEDICAL</th>
-              <th class="text-center">KANDEPNAKER</th>
+              <th class="text-center">DISNAKER</th>
               <th class="text-center">PK</th>
               <th class="text-center">PASPOR</th>
               <th class="text-center">VISA</th>

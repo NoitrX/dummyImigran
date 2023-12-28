@@ -51,4 +51,27 @@ class dashboardRepository {
             throw new Exception($e->getMessage());
         }
     }
+
+    public function index()
+    {
+        $medicalUsers = User::where('status', '=', 'medical')->count();
+        $blkln = User::where('status', '=', 'blkln')->count();
+        $rekompassport  = User::where('status', '=', 'rekompassport')->count();
+        $sudahTerbang = User::where('status_penerbangan', '=', 'terbang')->count();
+        $belumTerbang = User::where('status_penerbangan', '=', 'belum_terbang')->count();
+        $pmiFit = User::where('status_medical', '=', 'fit')->count();
+        $nonFit = User::where('status_medical', '=', 'non_fit')->count();
+        $nonApproved = User::where('status_akun', '=', 'non_approved')->count();
+
+        return [
+            'medicalUsers' => $medicalUsers,
+            'blkln' => $blkln,
+            'rekompassport' => $rekompassport,
+            'sudahTerbang' => $sudahTerbang,
+            'belumTerbang' => $belumTerbang,
+            'pmiFit' => $pmiFit,
+            'nonFit' => $nonFit,
+            'nonApproved' => $nonApproved,
+        ];
+    }
 }

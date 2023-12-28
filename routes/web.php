@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DirekturController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\SaranaKesehatanController;
 use App\Http\Controllers\UserController;
@@ -113,3 +114,6 @@ Route::prefix('/api/admin')->group(function() {
 
 
 
+Route::prefix('direktur')->group(function() {
+    Route::get('/', [DirekturController::class, 'index'])->name('direktur.index')->middleware(['auth:admin,web']);
+});

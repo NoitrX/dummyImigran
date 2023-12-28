@@ -44,7 +44,6 @@ class AuthController extends Controller
                 'password.required' => 'Password Wajib Diisi!!',
             ]);
     
-
             $user = User::where('email', $credentials['email'])->first();
     
             if ($user) {
@@ -54,17 +53,29 @@ class AuthController extends Controller
     
                 if (Auth::guard('web')->attempt($credentials)) {
                     $request->session()->regenerate();
-                    return redirect()->intended('/users');
+    
+               
+                    if ($user->level == 'direktur') {
+                        return redirect()->intended('/direktur');
+                        return 'ini direktur';
+                    } elseif ($user->level == 'admin') {
+                        return redirect()->intended('/users');
+                    }
                 }
             }
     
-        
             $admin = Admin::where('email', $credentials['email'])->first();
     
             if ($admin) {
                 if (Auth::guard('admin')->attempt($credentials)) {
                     $request->session()->regenerate();
-                    return redirect()->intended('/users');
+    
+           
+                    if ($admin->level == 'direktur') {
+                        return redirect()->intended('/direktur');
+                    } elseif ($admin->level == 'admin') {
+                        return redirect()->intended('/users');
+                    }
                 }
             }
     
@@ -101,6 +112,8 @@ class AuthController extends Controller
             'agama' => 'required',
             'no_telp' => 'required',
             'no_surat_izin' => 'required',
+            'no_nik' => 'required|numeric|digits:16',
+            'no_kk' => 'required|numeric|digits:16',
             'pendidikan' => 'required',
             'status_menikah' => 'required',
             'doc_ktp' => 'required|mimes:pdf|max:3072',

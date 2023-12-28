@@ -44,19 +44,19 @@
                         <div class="navbar-brand-box">
                             <a href="index.html" class="logo logo-dark">
                                 <span class="logo-sm">
-                                    <img src="assets/images/logo-sm.svg" alt="" height="24">
+                                    <img src="{{asset('assets/images/logo-sm.svg')}}" alt="" height="24">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="assets/images/logo-sm.svg" alt="" height="24"> <span class="logo-txt">AMS</span>
+                                    <img src="{{asset('assets/images/logo-sm.svg')}}" alt="" height="24"> <span class="logo-txt">AMS</span>
                                 </span>
                             </a>
 
                             <a href="index.html" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <img src="assets/images/logo-sm.svg" alt="" height="24">
+                                    <img src="{{asset('assets/images/logo-sm.svg')}}" alt="" height="24">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="assets/images/logo-sm.svg" alt="" height="24"> <span class="logo-txt">AMS</span>
+                                    <img src="{{asset('assets/images/logo-sm.svg')}}" alt="" height="24"> <span class="logo-txt">AMS</span>
                                 </span>
                             </a>
                         </div>
@@ -85,7 +85,7 @@
                         <div class="dropdown d-inline-block">
                             <button type="button" class="btn header-item bg-light-subtle border-start border-end" id="page-header-user-dropdown"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="rounded-circle header-profile-user" src="assets/images/logo-sm.svg"
+                                <img class="rounded-circle header-profile-user" src="{{asset('assets/images/logo-sm.svg')}}"
                                     alt="Header Avatar">
                                 <span class="d-none d-xl-inline-block ms-1 fw-medium">{{auth()->user()->email}}</span>
                             </button>
@@ -315,6 +315,14 @@
         <script src="{{asset('assets/js2/jquery-jvectormap-1.2.2.min.js')}}"></script>
         <script src="{{asset('assets/js2/jquery-jvectormap-world-mill-en.js')}}"></script>
         <!-- dashboard init -->
+        <script src="{{ asset('assets/libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+        <script src="{{ asset('assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+        <!-- Buttons examples -->
+        <script src="{{ asset('assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+        <script src="{{ asset('assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js')}}"></script>
+        <script src="{{ asset('assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+        <script src="{{ asset('assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js')}}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
         <script src="{{asset('assets/js2/dashboard.init.js')}}"></script>
 
         <script src="{{asset('assets/js2/app.js')}}"></script>

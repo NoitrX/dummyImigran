@@ -1,13 +1,12 @@
-@extends('Layouts.main')
+@extends('Layouts.mainD')
 @section('title', 'LIST | PMI')
 
-@section('content')
+@section('sections')
 <div class="row">
   <div class="col-12">
     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
       <h4 class="mb-sm-0 font-size-18">DAFTAR PMI</h4>
       <button class="btn btn-primary " id="filter-active"> <i class="fas fa-filter"></i> FILTER DATA</button>
-      <button class="btn btn-primary  rounded-0"  data-bs-toggle="modal" data-bs-target="#modalTambah"> <i class="fas fa-plus"></i> Tambah Data</button>
     </div>
   </div>
 </div>
@@ -21,8 +20,7 @@
         <div class="d-flex justify-content-between">
           <p class="card-title-desc">Berikut ini adalah Daftar Para PMI dengan beberapa Proses yang sudah dijalani</p>
           <div>
-            <a href="#" class="btn btn-danger btn-sm"  id="deleteAllSelectedRecord" style="display: none;"><i class="fas fa-trash mx-1"></i> Delete All</a>
-            <a href="{{ route('pmi.exportExcel', ['status' => 'belum_selesai'])}}" class="btn btn-success btn-sm rounded-0"> <i class="fa-solid fa-file-excel"></i> Export </a>
+
           </div>
          
         </div>
@@ -72,10 +70,10 @@
               <th class="text-center">NEGARA</th>
               <th class="text-center">JABATAN</th>
               <th class="text-center">TTL</th>
-              <th class="text-center">NO TELP</th>
               <th class="text-center">STATUS</th>
               <th class="text-center">STATUS MEDICAL</th>
-              <th class="text-center">DISNAKER</th>
+              <th class="text-center">STATUS PENERBANGAN</th>
+              <th class="text-center">KANDEPNAKER</th>
               <th class="text-center">PK</th>
               <th class="text-center">PASPOR</th>
               <th class="text-center">VISA</th>
@@ -97,199 +95,7 @@
   </div>
 </div>
 
-<div class="modal fade" id="modalTambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">TAMBAH DATA</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="{{ route('user.addData')}}" method="POST" id="addDataForm" enctype="multipart/form-data">
-          @csrf
-          <div class="row p-3">
-                 
-              <div class="col-md-4 mb-2">
-                  <label for="namaLengkap" class="form-label" >Nama Lengkap</label>
-                  <input type="text" name="name" value="{{ old('name') }}" class="form-control rounded-0 @error('name') is-invalid @enderror" id="namaLengkap" placeholder="Isi Nama Lengkap" autocomplete="off">
-                  @error('name')
-                  <div class=" detailed_text">{{ $message }}</div>
-              @enderror
-              </div>
-  
-              <div class="col-md-4 mb-2">
-                  <label for="namaLengkap" class="form-label" >Nama Bapak</label>
-                  <input type="text" name="nama_bapak" value="{{ old('nama_bapak') }}" class="form-control rounded-0 @error('nama_bapak') is-invalid @enderror" id="namaBapak" placeholder="Isi Nama Bapak" autocomplete="off">
-                  @error('nama_bapak')
-                  <div class=" detailed_text">{{ $message }}</div>
-              @enderror
-              </div>
-              <div class="col-md-4 mb-2">
-                  <label for="" class="form-label">Email</label>
-                  <input type="text" name="email" value="{{ old('email') }}" class="form-control rounded-0 @error('email') is-invalid @enderror"  placeholder="Isi Alamat Email" autocomplete="off">
-                  @error('email')
-                  <div class=" detailed_text">{{ $message }}</div>
-              @enderror
-              </div>
-              <div class="col-md-6 mb-2">
-                  <label for="" class="form-label">Password</label>
-                  <input type="password" name="password" value="{{ old('password') }}" class="form-control rounded-0 @error('password') is-invalid @enderror"  placeholder="Isi Password">
-                  @error('password')
-                  <div class=" detailed_text">{{ $message }}</div>
-              @enderror
-              </div>
-              <div class="col-md-6 mb-2">
-                  <label for="" class="form-label">Tanggal Lahir</label>
-                  <input type="date" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" class="form-control rounded-0 @error('tanggal_lahir') is-invalid @enderror"  placeholder="Isi Alamat Email">
-                  @error('tanggal_lahir')
-                  <div class=" detailed_text">{{ $message }}</div>
-              @enderror
-              </div>
-              <div class="col-md-6 mb-2">
-                  <label for="" class="form-label">Tempat Lahir</label>
-                  <input type="text" name="tempat_lahir" value="{{ old('tempat_lahir') }}" class="form-control rounded-0 @error('tempat_lahir') is-invalid @enderror"  placeholder="Tempat Lahir">
-                  @error('tempat_lahir')
-                  <div class=" detailed_text">{{ $message }}</div>
-              @enderror
-              </div>
-              <div class="col-md-6 mb-2">
-                  <label for="" class="form-label">Agama</label>
-                  <input type="text" name="agama" value="{{ old('agama') }}" class="form-control rounded-0 @error('agama') is-invalid @enderror"   placeholder="Isi Agama" autocomplete="off">
-                  @error('agama')
-                  <div class=" detailed_text">{{ $message }}</div>
-              @enderror
-              </div>
-              <div class="col-md-6 mb-2">
-                  <label for="" class="form-label">No Telp</label>
-                  <input type="number" name="no_telp" value="{{ old('no_telp') }}" class="form-control rounded-0 @error('no_telp') is-invalid @enderror"  placeholder="Isi Nomor Telepon" autocomplete="off">
-                  @error('no_telp')
-                  <div class=" detailed_text">{{ $message }}</div>
-              @enderror
-              </div>
 
-              <div class="col-lg-6 col-sm-6 col-12">
-                <div class="form-group">
-                    <label>Negara <span style="color: red">*</span> </label>
-                    <select name="negara" class="form-control" id="">
-                        <option value="ARAB SAUDI">ARAB SAUDI</option>
-                        <option value="TAIWAN">TAIWAN</option>
-                        <option value="JEPANG">JEPANG</option>
-                        <option value="KUWAIT">KUWAIT</option>
-                        <option value="MALAYSIA">MALAYSIA</option>
-                        <option value="BRUNEI DARUSSALAM">BRUNEI DARUSSALAM</option>
-                        <option value="SINGAPURA">SINGAPURA</option>
-                        <option value="BAHREN">BAHREN</option>
-                    </select>
-                </div>
-            </div>
-              <div class="col-md-6 mb-2">
-                  <label for="" class="form-label">No KK</label>
-                  <input type="number" name="no_kk" value="{{ old('no_kk') }}" class="form-control rounded-0 @error('no_kk') is-invalid @enderror"  placeholder="Isi Nomor KK">
-                  @error('no_kk')
-                  <div class=" detailed_text">{{ $message }}</div>
-              @enderror
-              </div>
-  
-              <div class="col-md-6 mb-2">
-                  <label for="" class="form-label"> No NIK(NO KTP)</label>
-                  <input type="number" name="no_nik" value="{{ old('no_nik') }}" placeholder="Isi Nomor KTP " class="form-control rounded-0 @error('no_nik') is-invalid @enderror" >
-                  @error('no_nik')
-                  <div class="text-danger detailed_text">{{ $message }}</div>
-              @enderror
-              </div>
-  
-              <div class="col-md-6 mb-2">
-                  <label for="" class="form-label"> No Surat Izin</label>
-                  <input type="text" name="no_surat_izin" value="{{ old('no_surat_izin') }}"  placeholder="Isi Nomor SURAT IZIN" class="form-control rounded-0 @error('no_surat_izin') is-invalid @enderror" autocomplete="off">
-                  @error('no_surat_izin')
-                  <div class="text-danger detailed_text">{{ $message }}</div>
-              @enderror
-              </div>
-              <div class="col-md-6 mb-2">
-                  <label for="" class="form-label">Pendidikan</label>
-                  <select name="pendidikan" class="form-control rounded-0 @error('pendidikan') is-invalid @enderror" >
-                      <option value="hidden">------ Pilih Opsi -----</option>
-                      <option value="SD">SD</option>
-                      <option value="SMP">SMP</option>
-                      <option value="SMA/SMK">SMA/SMK</option>
-                      <option value="TIDAK_SEKOLAH">TIDAK BERSEKOLAH</option>
-                  </select>
-                  @error('pendidikan')
-                  <div class="text-danger detailed_text">{{ $message }}</div>
-              @enderror
-              </div>
-              <div class="col-md-6 mb-2">
-                  <label for="" class="form-label">Status Menikah</label>
-                  <select name="status_menikah" class="form-control rounded-0 @error('status_menikah') is-invalid @enderror"  >
-                      <option value="hidden">------ Pilih Opsi -----</option>
-                      <option value="menikah">Menikah</option>
-                      <option value="belom_menikah">Belum Menikah</option>
-                      <option value="janda">Janda</option>
-                  </select>
-                  @error('status_menikah')
-                  <div class="text-danger detailed_text">{{ $message }}</div>
-              @enderror
-              </div>
-              <div class="col-md-6 mb-2">
-                  <label for="" class="form-label">Upload SCAN KTP</label>
-                  <input type="file" name="doc_ktp" class="form-control rounded-0 @error('doc_ktp') is-invalid @enderror" >
-                  @error('doc_ktp')
-                  <div class="text-danger detailed_text">{{ $message }}</div>
-              @enderror
-              </div>
-              <div class="col-md-6 mb-2">
-                  <label for="" class="form-label">Upload Surat Izin</label>
-                  <input type="file" name="doc_surat_izin" class="form-control rounded-0 @error('doc_surat_izin') is-invalid @enderror" >
-                  @error('doc_surat_izin')
-                  <div class="text-danger detailed_text">{{ $message }}</div>
-              @enderror
-              </div>
-             
-              <div class="col-md-6 mb-2">
-                  <label for="" class="form-label">Upload Foto</label>
-                  <input type="file" name="foto" class="form-control rounded-0 @error('foto') is-invalid @enderror" >
-                  @error('foto')
-                  <div class="text-danger detailed_text">{{ $message }}</div>
-              @enderror
-              </div>
-  
-  
-              <div class="col-md-6 mb-2">
-                  <label for="" class="form-label">Upload KK</label>
-                  <input type="file" name="doc_kk" class="form-control rounded-0 @error('doc_kk') is-invalid @enderror" >
-                  @error('doc_kk')
-                  <div class="text-danger detailed_text">{{ $message }}</div>
-              @enderror
-              </div>
-  
-              <div class="col-md-6 mb-2">
-                  <label for="" class="form-label">Upload Akta Kelahiran</label>
-                  <input type="file" name="doc_akta" class="form-control rounded-0 @error('doc_akta') is-invalid @enderror" >
-                  @error('doc_akta')
-                  <div class="text-danger detailed_text">{{ $message }}</div>
-              @enderror
-              </div>
-    
-            </div>
-              <div class="col-md-12 mb-2">
-                  <label for="" class="form-label">Alamat</label>
-                  <textarea name="alamat" class="form-control @error('alamat') is-invalid @enderror" id="" cols="30" rows="5"></textarea>
-                  @error('alamat')
-                  <div class="text-danger detailed_text">{{ $message }}</div>
-              @enderror
-              </div>
-             
-        
-       
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="SUBMIT" class="btn btn-primary">TAMBAH</button>
-      </form>
-      </div>
-    </div>
-  </div>
-</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
 
@@ -297,6 +103,8 @@
 <script src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
 
 <script>
+  var type = '{{ $type }}';
+  var status = '{{ $status }}';
   var downloadPkRoute = "{{ route('download.bpjs', ['id' => ':id', 'document' => 'pk']) }}";
   var downloadPasportRoute = "{{ route('download.bpjs', ['id' => ':id', 'document' => 'pasport']) }}";
   var downloadVisaRoute = "{{ route('download.bpjs', ['id' => ':id', 'document' => 'visa']) }}";
@@ -316,7 +124,9 @@
        serverSide: true,
        info: false,
        ajax: {
-         url: '/api/users',
+        url: '{{ route("direktur.indexGet", ["type" => ":type", "status" => ":status"]) }}'
+                .replace(':type', type)
+                .replace(':status', status),
          type: 'GET',
          data: function (d) {
            d.keyword = $('#search').val();
@@ -353,27 +163,10 @@
              var deleteUrl = "{{ url('api/users/delete')}}"
              var approveUrl = "{{ url('/api/users/setComplete')}}"
              var btn = `<div class="d-flex">
-                      <form action="${approveUrl}/${row.id}" id="complete-form" class="mx-1 complete-form" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-success rounded-0 btn-sm" id="btn-completed">
-                                  <i class="fa-solid fa-check"></i>
-                                </button>
-                       </form>
+                    
                        <a class="btn btn-primary btn-sm text-white rounded-0 mx-1" href="${getUrlDetail}/${row.id}">
                              <i class="fas fa-eye"></i>
                            </a>
-                           
-                           <form action="${deleteUrl}/${row.id}" class="mx-1 delete-form" method="POST">
-                             @method('delete')
-                             @csrf
-                             <button type="submit" class="btn btn-danger rounded-0 btn-sm delete-btn">
-                               <i class="fas fa-trash"></i>
-                             </button>
-                           </form>
-                       <a class="btn btn-info btn-sm text-white rounded-0 mx-1 detailed"  href="${getUrlStore}/${row.id}">
-                           <i class="fas fa-edit"></i> Lengkapi
-                       </a>
-                     
                          </div>`;
              return btn;
            },
@@ -394,9 +187,9 @@
             return combinedInfo;
            },
          },
-         { data: 'no_telp' },
          { data: 'status' },
          { data: 'status_medical' },
+         { data: 'status_penerbangan' },
          { data: 'tempat_lahir' },
   
          {

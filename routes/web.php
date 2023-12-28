@@ -116,4 +116,6 @@ Route::prefix('/api/admin')->group(function() {
 
 Route::prefix('direktur')->group(function() {
     Route::get('/', [DirekturController::class, 'index'])->name('direktur.index')->middleware(['auth:admin,web']);
+    Route::get('/{type}/{status}', [DirekturController::class, 'indexGet'])->name('direktur.indexGet')->middleware(['auth:admin,web']);
+    Route::get('/viewFilter/{type}/{status}', [DirekturController::class, 'viewFilter'])->name('direktur.viewFilter')->middleware(['auth:admin,web']);
 });

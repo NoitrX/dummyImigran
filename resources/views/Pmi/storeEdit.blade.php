@@ -57,7 +57,7 @@
 
         <div class="col-lg-3 col-sm-6 col-12">
             <div class="form-group">
-            <label>Status Medical <span style="color: red">*</span> </label>
+            <label>Status Medical</label>
             <select name="status_medical" class="form-control" id="">
                 <option value="{{$users->status_medical}}">{{$users->status_medical}}</option>
                 <option value="==||==">==||==</option>
@@ -83,7 +83,7 @@
 
     <div class="col-lg-3 col-sm-6 col-12 mt-1">
         <div class="form-group">
-        <label>Data Medical <span style="color: red">*</span> </label>
+        <label>Data Medical </label>
         <select name="data_medical_id" class="form-control" id="">
             @foreach ($saranaKesehatan as $item)
             <option value="{{$item->id}}">{{$item->nama_sarana}}</option>
@@ -94,7 +94,7 @@
         </div>
         <div class="col-lg-3 col-sm-6 col-12 mt-1">
             <div class="form-group">
-                <label>KK <span style="color: red">*</span></label>
+                <label>KK</label>
                 <input type="file" class="form-control" name="doc_kk" id="ijazahInput">
             </div>
             <div>
@@ -105,7 +105,7 @@
 
         <div class="col-lg-3 col-sm-6 col-12 mt-1">
             <div class="form-group">
-                <label>AKTA <span style="color: red">*</span></label>
+                <label>AKTA</label>
                 <input type="file" class="form-control" name="doc_akta" id="ijazahInput">
             </div>
             <div>
@@ -115,7 +115,7 @@
         </div>
     <div class="col-lg-3 col-sm-6 col-12">
         <div class="form-group">
-            <label>Ijazah <span style="color: red">*</span></label>
+            <label>Ijazah</label>
             <input type="file" class="form-control" name="ijazah" id="ijazahInput">
         </div>
         <div>
@@ -125,7 +125,7 @@
     </div>
     <div class="col-lg-3 col-sm-6 col-12 mt-2">
         <div class="form-group">
-        <label>Surat Nikah (Jika Ada) <span style="color: red">*</span> </label>
+        <label>Surat Nikah (Jika Ada) </label>
         <input type="file" value="{{$users->surat_nikah}}" class="form-control" name="surat_nikah" id="suratNikahInput">
         
         <div>
@@ -136,7 +136,7 @@
     </div>
     <div class="col-lg-3 col-sm-6 col-12 mt-2">
         <div class="form-group">
-        <label>Medical <span style="color: red">*</span> </label>
+        <label>Medical </label>
         <input type="file"  class="form-control" name="medical" id="medicalInput">
         
         <div>
@@ -148,7 +148,7 @@
 
     <div class="col-lg-3 col-sm-6 col-12 mt-2">
         <div class="form-group">
-        <label>BNSP <span style="color: red">*</span> </label>
+        <label>BNSP </label>
         <input type="file" value="{{$users->bnsp}}" class="form-control" name="bnsp" id="bnspInput">
         
         <div>
@@ -159,7 +159,7 @@
     </div>
     <div class="col-lg-3 col-sm-6 col-12 mt-2">
         <div class="form-group">
-        <label>BPJS <span style="color: red">*</span> </label>
+        <label>BPJS </label>
         <input type="file" value="{{$users->bpjs}}" class="form-control" name="bpjs" id="bpjsInput">
         
         <div>
@@ -170,7 +170,7 @@
     </div>
     <div class="col-lg-3 col-sm-6 col-12 mt-2">
         <div class="form-group">
-        <label>PP <span style="color: red">*</span> </label>
+        <label>PP </label>
         <input type="file" value="{{$users->pp}}" class="form-control" name="pp" id="ppInput">
         
         <div>
@@ -181,7 +181,7 @@
     </div>
     <div class="col-lg-3 col-sm-6 col-12 mt-2">
         <div class="form-group">
-        <label>Pasport <span style="color: red">*</span> </label>
+        <label>Pasport </label>
         <input type="file" value="{{$users->pasport}}" class="form-control" name="pasport" id="pasportInput">
         
         <div>
@@ -192,7 +192,7 @@
     </div>
     <div class="col-lg-6 col-sm-6 col-12 mt-2">
         <div class="form-group">
-        <label>PK <span style="color: red">*</span> </label>
+        <label>PK </label>
         <input type="file" value="{{$users->pk}}" class="form-control" name="pk" id="pkInput">
         
         <div>
@@ -203,7 +203,7 @@
     </div>
     <div class="col-lg-6 col-sm-6 col-12 mt-2">
         <div class="form-group">
-        <label>VISA <span style="color: red">*</span> </label>
+        <label>VISA </label>
         <input type="file" value="{{$users->visa}}" class="form-control" name="visa" id="visaInput">
         
         <div>
@@ -214,7 +214,7 @@
     </div>
     <div class="col-lg-6 col-sm-6 col-12 mt-2">
         <div class="form-group">
-        <label>EKTKLN <span style="color: red">*</span> </label>
+        <label>EKTKLN </label>
         <input type="file" value="{{$users->ektkln}}" class="form-control" name="ektkln" id="ektklnInput">
         
         <div>

@@ -212,7 +212,18 @@
         </div>
     </div>
     </div>
-    <div class="col-lg-6 col-sm-6 col-12 mt-2">
+    <div class="col-lg-4 col-sm-6 col-12 mt-2">
+        <div class="form-group">
+        <label>TIKET </label>
+        <input type="file" value="{{$users->tiket}}" class="form-control" name="tiket" id="tiketInput">
+        
+        <div>
+            <label>File Yang Sudah Ada:</label>
+            <span id="selectedInput">{{$users->tiket}}</span>
+        </div>
+    </div>
+    </div>
+    <div class="col-lg-4 col-sm-6 col-12 mt-2">
         <div class="form-group">
         <label>EKTKLN </label>
         <input type="file" value="{{$users->ektkln}}" class="form-control" name="ektkln" id="ektklnInput">
@@ -223,7 +234,7 @@
         </div>
     </div>
     </div>
-    <div class="col-lg-6 col-sm-6 col-12 mt-2">
+    <div class="col-lg-4 col-sm-6 col-12 mt-2">
     <div class="form-group">
     <label> Status <span style="color: red">*</span> </label>
     <select class="form-control" name="status">

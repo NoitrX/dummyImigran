@@ -4,20 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>DAFTAR | PMI</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-</head>
-<body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>DAFTAR | PMI</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('auth/style.css')}}">
     <link href="{{ asset('assets/css/me.css')}}" rel="stylesheet" type="text/css" />
+
    <style>
         .image {
             text-align: center;
@@ -36,6 +28,7 @@
             <img class="" style="height: 80px" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
             <h2 class="header">DAFTAR SEBAGAI PMI</h2>
             <p class="text-sm" style="font-size: 10px">Setelah Berhasil Mendaftar Harap Tunggu Admin Menghubungi</p>
+            <p class="text-sm text-danger font-bold" style="font-size: 10px">SEMUA WAJIB DIISI</p>
             <a href="{{ route('login')}}" class="text-sm fw-bold" style="font-size: 13px ; text-decoration:none">LOGIN</a>
         </div>
         <form action="{{ route('register.store')}}" method="POST" enctype="multipart/form-data">
@@ -84,9 +77,31 @@
                 <div class=" detailed_text">{{ $message }}</div>
             @enderror
             </div>
+
+            <div class="col-md-6 mb-2">
+                <label for="" class="form-label">Domisili</label>
+                <select name="domisili" class="form-select domisili rounded-0" id="domisili">
+                    <option value="">Pilih Domisili</option>
+                    @foreach ($regency as $item)
+                        <option value="{{$item->id}}">{{$item->name}}</option>
+                    @endforeach
+                </select>
+                @error('domisili')
+                <div class=" detailed_text">{{ $message }}</div>
+            @enderror
+            </div>
+
+          
+            <div class="col-md-6 mb-2">
+                <label for="" class="form-label">Provinsi</label>
+               <input type="text" class="form-control" id="provinsi" name="provinsi">
+                @error('provinsi')
+                <div class=" detailed_text">{{ $message }}</div>
+            @enderror
+            </div>
             <div class="col-md-6 mb-2">
                 <label for="" class="form-label">Agama</label>
-                <select name="agama" class="form-control" id="">
+                <select name="agama" class="form-select rounded-0 " id="">
                     <option value="ISLAM">ISLAM</option>
                     <option value="KRISTEN">KRISTEN</option>
                     <option value="KATOLIK">KATOLIK</option>
@@ -130,7 +145,7 @@
             </div>
             <div class="col-md-6 mb-2">
                 <label for="" class="form-label">Pendidikan</label>
-                <select name="pendidikan" class="form-control rounded-0 @error('pendidikan') is-invalid @enderror" >
+                <select name="pendidikan" class="form-select  rounded-0 @error('pendidikan') is-invalid @enderror" >
                     <option value="hidden">------ Pilih Opsi -----</option>
                     <option value="SD">SD</option>
                     <option value="SMP">SMP</option>
@@ -144,7 +159,7 @@
 
             <div class="col-md-6 mb-2">
                 <label for="" class="form-label">Negara</label>
-                <select name="negara" class="form-control rounded-0 @error('negara') is-invalid @enderror" >
+                <select name="negara" class="form-select  rounded-0 @error('negara') is-invalid @enderror" >
                     <option value="hidden">------ Pilih Opsi -----</option>
                     <option value="ARAB SAUDI">ARAB SAUDI</option>
                     <option value="TAIWAN">TAIWAN</option>
@@ -161,7 +176,7 @@
             </div>
             <div class="col-md-4 mb-2">
                 <label for="" class="form-label">Status Menikah</label>
-                <select name="status_menikah" class="form-control rounded-0 @error('status_menikah') is-invalid @enderror"  >
+                <select name="status_menikah" class="form-select  rounded-0 @error('status_menikah') is-invalid @enderror"  >
                     <option value="hidden">------ Pilih Opsi -----</option>
                     <option value="menikah">Menikah</option>
                     <option value="belom_menikah">Belum Menikah</option>
@@ -172,14 +187,14 @@
             @enderror
             </div>
             <div class="col-md-4 mb-2">
-                <label for="" class="form-label">Upload SCAN KTP</label>
+                <label for="" class="form-label">Upload SCAN KTP <span class="text-danger">(FORMAT PDF)</span> </label>
                 <input type="file" name="doc_ktp" class="form-control rounded-0 @error('doc_ktp') is-invalid @enderror" >
                 @error('doc_ktp')
                 <div class="text-danger detailed_text">{{ $message }}</div>
             @enderror
             </div>
             <div class="col-md-4 mb-2">
-                <label for="" class="form-label">Upload Surat Izin</label>
+                <label for="" class="form-label">Upload Surat Izin <span class="text-danger">(FORMAT PDF)</span></label>
                 <input type="file" name="doc_surat_izin" class="form-control rounded-0 @error('doc_surat_izin') is-invalid @enderror" >
                 @error('doc_surat_izin')
                 <div class="text-danger detailed_text">{{ $message }}</div>
@@ -187,7 +202,7 @@
             </div>
            
             <div class="col-md-6 mb-2">
-                <label for="" class="form-label">Upload Foto</label>
+                <label for="" class="form-label">Upload Foto <span class="text-danger">(FORMAT PNG,JPG,JPEG)</span> </label>
                 <input type="file" name="foto" class="form-control rounded-0 @error('foto') is-invalid @enderror" >
                 @error('foto')
                 <div class="text-danger detailed_text">{{ $message }}</div>
@@ -196,7 +211,7 @@
 
 
             <div class="col-md-6 mb-2">
-                <label for="" class="form-label">Upload KK</label>
+                <label for="" class="form-label">Upload KK <span class="text-danger">(FORMAT PDF)</span> </label>
                 <input type="file" name="doc_kk" class="form-control rounded-0 @error('doc_kk') is-invalid @enderror" >
                 @error('doc_kk')
                 <div class="text-danger detailed_text">{{ $message }}</div>
@@ -204,7 +219,7 @@
             </div>
 
             <div class="col-md-12 mb-2">
-                <label for="" class="form-label">Upload Akta Kelahiran</label>
+                <label for="" class="form-label">Upload Akta Kelahiran <span class="text-danger">(FORMAT PDF)</span> </label>
                 <input type="file" name="doc_akta" class="form-control rounded-0 @error('doc_akta') is-invalid @enderror" >
                 @error('doc_akta')
                 <div class="text-danger detailed_text">{{ $message }}</div>
@@ -224,10 +239,42 @@
         </form>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-</body>
-</html>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+   <script>
+        $(document).ready(function () {
+            $('#domisili').select2({
+                containerCssClass: 'custom-select2-container'
+            });
+        });
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+        $(document).ready(function () {
+            $.ajaxSetup({
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+            });
+
+            $('#domisili').change(function (e) {
+                console.log(e.target.value);
+                var selectedRegencyId = $(this).val();
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/getProvince/' + selectedRegencyId,
+                    success: function (data) {
+                        console.log(data.province)
+                        $('#provinsi').val(data.province);
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
+   
+  

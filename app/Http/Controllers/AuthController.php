@@ -6,6 +6,8 @@ use Exception;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Province;
+use App\Models\Regency;
 use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
@@ -29,7 +31,9 @@ class AuthController extends Controller
 
     public function register()
     {
-        return view('Auth.register');
+        $province = Province::all();
+        $regency = Regency::all();
+        return view('Auth.register', compact('regency', 'province'));
     }
 
     public function authenticate(Request $request)
@@ -102,6 +106,9 @@ class AuthController extends Controller
     public function storePmi(Request $request)
     {
 
+
+        // dd($request->all());
+    
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'nama_bapak' => 'required',
@@ -121,7 +128,8 @@ class AuthController extends Controller
             'foto' => 'required|mimes:png,jpg,jpeg|max:3072',
             'doc_kk' => 'required|mimes:pdf|max:3072',
             'doc_akta' => 'required|mimes:pdf|max:3072',
-            'alamat' => 'required',        
+            'alamat' => 'required',     
+
          ]);
 
          if ($validator->fails()) {
@@ -147,4 +155,17 @@ class AuthController extends Controller
 
         if ($check) throw ValidationException::withMessages(['email' => 'Email sudah ada']);
     }
+
+    public function getKab(Request $request, $regencyId)
+    {
+            $regency = Regency::with('province')->find($regencyId);
+
+            if (!$regency) {
+                return response()->json(['error' => 'Regency not found'], 404);
+            }
+
+            $provinceName = $regency->province->name;
+
+            return response()->json(['province' => $provinceName]);
+            }
 }

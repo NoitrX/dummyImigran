@@ -36,7 +36,7 @@
         <div class="row mb-4 mt-1 filter">
           <div class="col-lg-12 filter">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <select name="" id="status-filter" class="form-control filterPMI">
                         <option value="hidden">------ PILIH STATUS ------</option>==||==
                         <option value="==||==">==||==</option>
@@ -46,7 +46,7 @@
                         <option value="basmah">basmah</option>
                     </select>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <select name="" id="jabatan-filter" class="form-control filterPMI">
                         <option value="hidden">------ PILIH JABATAN ------</option>
                         <option value="HOUSE MAID">HOUSE MAID</option>
@@ -55,6 +55,27 @@
                         <option value="NURSE">NURSE</option>
                     </select>
                 </div>
+
+                <div class="col-lg-4">
+                  <select name="" id="provinsi-filter" class="form-control filterPMI">
+                      <option value="hidden">------ PILIH PROVINSI ------</option>
+                      <option value="JAWA BARAT">JAWA BARAT</option>
+                      <option value="JAWA TENGAH">JAWA TENGAH</option>
+                      <option value="JAWA TIMUR">JAWA TIMUR</option>
+                      <option value="BANTEN">BANTEN</option>
+                      <option value="DKI JAKARTA">DKI JAKARTA</option>
+                      <option value="DI YOGYAKARTA">DI YOGYAKARTA</option>
+                      <option value="NUSA TENGGARA BARAT">NUSA TENGGARA BARAT</option>
+                      <option value="NUSA TENGGARA TIMUR">NUSA TENGGARA TIMUR</option>
+                      <option value="LAMPUNG">LAMPUNG</option>
+                      <option value="SULAWESI SELATAN">SULAWESI SELATAN</option>
+                      <option value="SULAWESI TENGGARA">SULAWESI TENGGARA</option>
+                      <option value="SULAWESI TENGAH">SULAWESI TENGAH</option>
+                      <option value="SULAWESI BARAT">SULAWESI BARAT</option>
+                      <option value="GORONTALO">GORONTALO</option>
+                      <option value="SULAWESI UTARA">SULAWESI UTARA</option>
+                  </select>
+              </div>
             </div>
         </div>
       </div>
@@ -166,6 +187,27 @@
                   <div class=" detailed_text">{{ $message }}</div>
               @enderror
               </div>
+              <div class="col-md-6 mb-2">
+                <label for="" class="form-label">Domisili</label>
+                <select name="domisili" class="form-select domisili rounded-0" id="domisili">
+                    <option value="">Pilih Domisili</option>
+                    @foreach ($regency as $item)
+                        <option value="{{$item->id}}">{{$item->name}}</option>
+                    @endforeach
+                </select>
+                @error('domisili')
+                <div class=" detailed_text">{{ $message }}</div>
+            @enderror
+            </div>
+
+          
+            <div class="col-md-6 mb-2">
+                <label for="" class="form-label">Provinsi</label>
+               <input type="text" class="form-control" id="provinsi" name="provinsi">
+                @error('provinsi')
+                <div class=" detailed_text">{{ $message }}</div>
+            @enderror
+            </div>
 
               <div class="col-lg-6 col-sm-6 col-12">
                 <div class="form-group">
@@ -292,7 +334,8 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
-
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
 
@@ -322,6 +365,7 @@
            d.keyword = $('#search').val();
            d.jabatan_filter = $('#jabatan-filter').val();
            d.status_filter = $('#status-filter').val();
+           d.provinsi_filter = $('#provinsi-filter').val();
            d.page = page;
            d.perPage = 7;
          },
@@ -397,7 +441,7 @@
          { data: 'no_telp' },
          { data: 'status' },
          { data: 'status_medical' },
-         { data: 'tempat_lahir' },
+         { data: 'regency.name' },
   
          {
            data: 'pk',
@@ -511,6 +555,15 @@
         }
         dataTable.columns(6).search(selectedValue).draw();
     })
+
+    $('#provinsi-filter').on('change', function() {
+        var selectedValue = $(this).val();
+        if(selectedValue === 'hidden') {
+            dataTable.columns(6).search('').draw();
+        }
+        dataTable.columns(6).search(selectedValue).draw();
+    })
+
 
   function updatePaginationInfo(pagination) {
     if (pagination) {
@@ -630,6 +683,36 @@
            
         })
     })
+
+    $(document).ready(function () {
+            $('#domisili').select2({
+                containerCssClass: 'custom-select2-container'
+            });
+        });
+
+
+        $(document).ready(function () {
+            $.ajaxSetup({
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+            });
+
+            $('#domisili').change(function (e) {
+                console.log(e.target.value);
+                var selectedRegencyId = $(this).val();
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/getProvince/' + selectedRegencyId,
+                    success: function (data) {
+                        console.log(data.province)
+                        $('#provinsi').val(data.province);
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+        });
 
 
    $(document).on('click', '.delete-btn', function (e) {

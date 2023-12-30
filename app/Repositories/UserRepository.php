@@ -12,13 +12,15 @@ use Illuminate\Support\Facades\Hash;
 
 class userRepository {
 
-    public function indexApi(Request $request, $page, $perPage, $keyword, $jabatanFilter, $statusFilter)
+    public function indexApi(Request $request, $page, $perPage, $keyword, $jabatanFilter, $statusFilter, $provinsiFilter)
     {
         try {
-            $query = User::with(['createdByUser', 'updatedByUser'])->where('users.status_akun', '=', 'approved')
+            $query = User::with(['createdByUser', 'updatedByUser', 'regency']) 
+            ->where('users.status_akun', '=', 'approved')
             ->where('users.status_akhir', '=', 'belum_selesai')
             ->select('users.name', 'users.tempat_lahir','users.tanggal_lahir', 'users.negara', 'users.no_telp', 'users.jabatan', 'users.status', 'users.created_by', 'users.updated_by',
-            'users.created_at','users.updated_at', 'users.id', 'users.pasport', 'users.pk', 'users.visa', 'users.nama_bapak', 'users.status_medical')->orderBy('name', 'asc');
+                'users.created_at','users.updated_at', 'users.id', 'users.pasport', 'users.pk', 'users.visa', 'users.nama_bapak', 'users.status_medical', 'users.domisili_id')
+            ->orderBy('name', 'asc');
             
              if ($keyword) {
                 $query->where(function($query) use ($keyword) {
@@ -38,6 +40,10 @@ class userRepository {
 
              if($statusFilter != 'hidden') {
                 $query->where('status', $statusFilter);
+             }
+
+             if($provinsiFilter != 'hidden') {
+                $query->where('provinsi', $provinsiFilter);
              }
             $totalRecords = $query->count();
             $totalPages = ceil($totalRecords / $perPage);
@@ -85,7 +91,8 @@ class userRepository {
                'visa' => $request->visa,
                'ektkln' => $request->ektkln,
                'status' => $request->status,
-               'status_medical' => $request->status_medical
+               'status_medical' => $request->status_medical,
+               'tiket' => $request->tiket,
               
             ];
             if($request->hasFile('medical')) {
@@ -112,6 +119,18 @@ class userRepository {
                 }else {
                     $input['doc_akta'] = $users->doc_akta;
                 }
+
+                if($request->hasFile('tiket')) {
+                    $tiket = $request->file('tiket');
+                    $namaTiket = time() . rand(1,32) . 'tiket' . '.' .$tiket->getClientOriginalExtension();
+                    $tiket->move('uploads', $namaTiket);
+                    $input['tiket'] = $namaTiket;
+                    if ($users->tiket && file_exists(public_path('uploads/' . $users->tiket))) {
+                        unlink(public_path('uploads/' . $users->tiket));
+                    }
+                    }else {
+                        $input['tiket'] = $users->tiket;
+                    }
 
             if($request->hasFile('doc_kk')) {
                 $doc_kk = $request->file('doc_kk');
@@ -242,7 +261,7 @@ class userRepository {
     public function getId($id)
     {
         
-        $user = User::with('saranaKesehatan')->findOrFail($id);
+        $user = User::with('saranaKesehatan', 'regency')->findOrFail($id);
         return $user;
        
     }
@@ -266,8 +285,13 @@ class userRepository {
         $bnsp = $user->bnsp;
         $doc_kk = $user->doc_kk;
         $doc_akta = $user->doc_akta;
+        $tiket = $user->tiket;
         if(!empty($foto)) {
             File::delete('uploads/'.$foto);
+        }
+
+        if(!empty($tiket)) {
+            File::delete('uploads/'.$tiket);
         }
 
         if(!empty($bpjs)) {
@@ -432,7 +456,9 @@ class userRepository {
             'doc_kk' => $request->doc_kk,
             'doc_akta' => $request->doc_akta,
             'status_akun' => 'non_approved',
-            'negara' => $request->negara
+            'negara' => $request->negara,
+            'provinsi' => $request->provinsi,
+            'domisili_id' => $request->domisili
         ];
 
         if (!empty($input['tanggal_lahir'])) {

@@ -33,6 +33,7 @@ Route::controller(AuthController::class)->group(function() {
     Route::get('/logout', 'logout')->name('logout');
     Route::get('register', 'register')->name('register.pmi');
     Route::post('register/store', 'storePmi')->name('register.store');
+    Route::get('/getProvince/{regencyId}', 'getKab');
 });
 
 Route::prefix('admin')->group(function() {
@@ -119,3 +120,4 @@ Route::prefix('direktur')->group(function() {
     Route::get('/{type}/{status}', [DirekturController::class, 'indexGet'])->name('direktur.indexGet')->middleware(['auth:admin,web']);
     Route::get('/viewFilter/{type}/{status}', [DirekturController::class, 'viewFilter'])->name('direktur.viewFilter')->middleware(['auth:admin,web']);
 });
+

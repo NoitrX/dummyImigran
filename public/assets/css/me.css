@@ -47,3 +47,14 @@ td {
 .non-fit-row {
     background-color: yellow !important; /* Important to override DataTables styles */
 }
+
+.custom-select2-container .select2-dropdown {
+    width: 100% !important;
+}
+
+@media (max-width: 768px) {
+    /* Adjust the width for smaller screens */
+    .select2-container--default .select2-dropdown {
+        width: 100% !important;
+    }
+}

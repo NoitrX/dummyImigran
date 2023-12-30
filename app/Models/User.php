@@ -63,5 +63,10 @@ class User extends Authenticatable
         {
             return $this->belongsTo(SaranaKesehatan::class, 'data_medical_id');
         }
+
+        public function regency()
+        {
+            return $this->belongsTo(Regency::class, 'domisili_id');
+        }
     
 }

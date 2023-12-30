@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SaranaKesehatan;
+use TCPDF;
 use Exception;
 use App\Models\User;
+use App\Models\Regency;
+use App\Models\Province;
 use Illuminate\Http\Request;
+use App\Models\SaranaKesehatan;
+use Illuminate\Support\Facades\DB;
 use App\Repositories\UserRepository;
+use Clegginabox\PDFMerger\PDFMerger;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Clegginabox\PDFMerger\PDFMerger;
-use Illuminate\Support\Facades\DB;
-use TCPDF;
 
 class UserController extends Controller
 {
@@ -23,7 +25,9 @@ class UserController extends Controller
    }
    public function index()
    {
-    return view('Pmi.index');
+    $province = Province::all();
+    $regency = Regency::all();
+    return view('Pmi.index', compact('province', 'regency'));
    }
 
    public function indexApi(Request $request)
@@ -34,7 +38,8 @@ class UserController extends Controller
         $keyword = $request->input('keyword');
         $jabatanFilter = $request->input('jabatan_filter');
         $statusFilter = $request->input('status_filter');
-        $users = $this->userRepository->indexApi($request, $page, $perPage, $keyword, $jabatanFilter, $statusFilter);
+        $provinsiFilter = $request->input('provinsi_filter');
+        $users = $this->userRepository->indexApi($request, $page, $perPage, $keyword, $jabatanFilter, $statusFilter, $provinsiFilter);
         $responseData = [
          'data' => $users['data'],
          'total_records' => $users['pagination']['total_records'],
@@ -68,6 +73,7 @@ class UserController extends Controller
          'pk'  => 'mimes:pdf|max:3072',
          'visa' => 'mimes:pdf|max:3072',
          'ektkln'=> 'mimes:pdf|max:3072',
+         'tiket'=> 'mimes:pdf|max:3072',
          'status' => 'required'
       ]);
 
@@ -123,7 +129,7 @@ class UserController extends Controller
    {
 
       $userId = $this->userRepository->getId($id);
-    //   dd($userId);
+
       return view('Pmi.detailPmi', compact('userId'));
    }
 
@@ -188,6 +194,11 @@ class UserController extends Controller
         $pasportDoc = public_path("uploads/{$user->pasport}");
         if (file_exists($pasportDoc)) {
             $pdfMerger->addPDF($pasportDoc, 'all');
+        }
+
+        $tiketDoc = public_path("uploads/{$user->tiket}");
+        if (file_exists($tiketDoc)) {
+            $pdfMerger->addPDF($tiketDoc, 'all');
         }
 
         $pkDoc = public_path("uploads/{$user->pk}");

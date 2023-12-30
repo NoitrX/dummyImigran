@@ -5,7 +5,6 @@
     <div class="col-12">
       <div class="page-title-box d-sm-flex align-items-center justify-content-between">
         <h4 class="mb-sm-0 font-size-18">DETAIL PMI</h4>
-        <a href="" class="btn btn-primary  rounded-0"> <i class="fas fa-plus"></i> Lengkapi Data</a>
       </div>
     </div>
   </div>
@@ -42,6 +41,8 @@
               <p><span class="label fw-bold">No NIK :</span> <span class="value">{{$userId->no_nik}}</span></p>
               <p><span class="label fw-bold">Negara :</span> <span class="value">{{$userId->negara}}</span></p>
               <p><span class="label fw-bold">Status Penerbangan :</span> <span class="value"> {{ $userId->status_penerbangan }}</span></p>
+              <p><span class="label fw-bold">Domisili :</span> <span class="value"> {{ $userId->regency->name }}</span></p>
+              <p><span class="label fw-bold">Disnaker :</span> <span class="value"> {{ $userId->provinsi }}</span></p>
           </div>
 
           <div class="col-lg-3 mt-4 detailed">
@@ -183,7 +184,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-6 mt-3  mb-5">
+            <div class="col-lg-4 mt-3 mb-3 ">
               <label for="">KK</label>
                 <div class="d-flex">
                   <input type="text" class="form-control" value="{{$userId->doc_kk}}">
@@ -193,8 +194,18 @@
                 </div>
             </div>
 
+            <div class="col-lg-4 mt-3 mb-3 ">
+              <label for="">TIKET</label>
+                <div class="d-flex">
+                  <input type="text" class="form-control" value="{{$userId->tiket}}">
+                  <a href="{{ route('download.bpjs', ['id' => $userId->id, 'document'=> 'tiket']) }}" id="downloadBpjsBtn" class="btn btn-primary btn-sm">
+                    <i class="fas fa-download"></i>
+                  </a>
+                </div>
+            </div>
+
             
-            <div class="col-lg-6 mt-3 mb-5">
+            <div class="col-lg-4 mt-3 mb-3">
               <label for="">AKTA</label>
                 <div class="d-flex">
                   <input type="text" class="form-control" value="{{$userId->doc_akta}}">

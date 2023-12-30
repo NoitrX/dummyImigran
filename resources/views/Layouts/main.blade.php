@@ -377,5 +377,6 @@
     <script src="{{ asset('assets/js/pages/datatables.init.js')}}"></script>
 
     <script src="{{ asset('assets/js/app.js')}}"></script>
+    
   </body>
 </html>

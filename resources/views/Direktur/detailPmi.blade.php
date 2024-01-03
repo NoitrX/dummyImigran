@@ -26,9 +26,15 @@
         </div>
         <div class="card-body">
           <div class="row">
-            <div class="col-lg-12 d-flex justify-content-between text-center mt-5">
+            <div class="col-lg-12 d-flex justify-content-center text-center mt-5">
               <h3 class="fw-bold mb-3 detailed">DATA PMI</h3>
-              <h2 class="text-sm" style="font-size: 15px">Pewawancara : {{$userId->wawancara_by}}</h2>
+            </div>
+            <div class="d-flex justify-content-end">
+              <div>
+                <h2 class="text-sm" style="font-size: 15px">Pewawancara : {{$userId->wawancara_by}}</h2>
+                <h2 class="text-sm" style="font-size: 15px">Tanggal Wawancara : {{$userId->tanggal_wawancara}}</h2>
+              </div>
+              
             </div>
             <div class="col-lg-6 d-flex justify-content-center mt-4">
                 <img width="80%"  src="{{ asset('uploads/'.$userId->foto)}}" alt="">

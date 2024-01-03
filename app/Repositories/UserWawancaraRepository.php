@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use Exception;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -64,6 +65,7 @@ class UserWawancaraRepository
             'negara' => $request->negara,
             'jabatan' => $request->jabatan,
             'pendidikan' => $request->pendidikan,
+            'tanggal_wawancara' => Carbon::now(),
         ];
 
         $usersWawancara->update($input);

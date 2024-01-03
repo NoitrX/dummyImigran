@@ -9,6 +9,7 @@ use App\Http\Controllers\SaranaKesehatanController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserNonApproveController;
 use App\Http\Controllers\UserSelesaiController;
+use App\Http\Controllers\UserWawancaraController;
 use App\Models\Admin;
 use App\Models\SaranaKesehatan;
 use Illuminate\Support\Facades\Route;
@@ -121,3 +122,14 @@ Route::prefix('direktur')->group(function() {
     Route::get('/viewFilter/{type}/{status}', [DirekturController::class, 'viewFilter'])->name('direktur.viewFilter')->middleware(['auth:admin,web']);
 });
 
+
+Route::prefix('users-wawancara')->group(function() {
+    Route::get('/', [UserWawancaraController::class, 'index'])->name('userWawancara.index')->middleware(['auth:admin,web']);
+});
+
+
+Route::prefix('/api/users-wawancara')->group(function() {
+    Route::get('/', [UserWawancaraController::class, 'indexApi'])->name('userWawancara.indexApi')->middleware(['auth:admin,web']);
+    Route::get('/edit/{id}', [UserWawancaraController::class, 'editApi'])->name('userWawancara.edit')->middleware(['auth:admin,web']);
+    Route::post('/update/{id}', [UserWawancaraController::class, 'updateApi'])->name('userWawancara.updateApi')->middleware(['auth:admin,web']);
+});

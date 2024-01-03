@@ -11,7 +11,6 @@
 
     <link rel="stylesheet" href="{{ asset('auth/css/owl.carousel.min.css')}}">
 
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('auth/css/bootstrap.min.css')}}">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- Style -->

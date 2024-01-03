@@ -158,12 +158,12 @@
 
               <li class="menu-title mt-2" data-key="t-components">Users</li>
 
-              <li>
+              {{-- <li>
                 <a href="{{ route('user-nonapproved.index')}}">
                   <i data-feather="users"></i>
                   <span data-key="t-horizontal">Data Pmi Non Approved</span>
                 </a>
-              </li>
+              </li> --}}
 
               <li class="menu-title mt-2" data-key="t-components">Setting</li>
 

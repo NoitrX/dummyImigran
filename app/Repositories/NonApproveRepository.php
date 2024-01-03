@@ -11,7 +11,7 @@ class NonApproveRepository {
     public function indexApi(Request $request, $page, $perPage, $keyword)
     {
           try {
-            $query = User::with(['createdByUser', 'updatedByUser'])->where('users.status_akun', '=', 'non_approved')
+            $query = User::with(['createdByUser', 'updatedByUser'])->where('users.status_akun', '=', 'non_approved')->where('users.status_wawancara', '=', 'SUDAH WAWANCARA')
             ->select('users.name', 'users.tempat_lahir','users.tanggal_lahir', 'users.no_telp', 'users.status_akun', 'users.created_by', 'users.updated_by',
             'users.created_at','users.updated_at', 'users.id', 'users.doc_ktp', 'users.doc_surat_izin', 'users.foto', 'users.no_kk', 'users.no_nik', 'users.no_surat_izin',
              'users.doc_kk', 'users.doc_akta', 'users.nama_bapak'
@@ -100,5 +100,13 @@ class NonApproveRepository {
         $users->update(['status_akun' => 'approved']);
 
         return $users;
+    }
+
+    public function getId($id)
+    {
+        
+        $user = User::with('saranaKesehatan', 'regency')->findOrFail($id);
+        return $user;
+       
     }
 }

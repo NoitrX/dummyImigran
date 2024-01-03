@@ -69,6 +69,7 @@ Route::prefix('dashboard')->group(function() {
 
 Route::prefix('users-nonapproved')->group(function() {
     Route::get('/', [UserNonApproveController::class, 'index'])->name('user-nonapproved.index')->middleware(['auth:admin,web']);
+    Route::get('/{id}', [UserNonApproveController::class, 'detailId'])->name('user.detailId')->middleware(['auth:admin,web']);
 });
 
 Route::prefix('/api/users-nonapproved')->group(function() {
@@ -132,4 +133,5 @@ Route::prefix('/api/users-wawancara')->group(function() {
     Route::get('/', [UserWawancaraController::class, 'indexApi'])->name('userWawancara.indexApi')->middleware(['auth:admin,web']);
     Route::get('/edit/{id}', [UserWawancaraController::class, 'editApi'])->name('userWawancara.edit')->middleware(['auth:admin,web']);
     Route::post('/update/{id}', [UserWawancaraController::class, 'updateApi'])->name('userWawancara.updateApi')->middleware(['auth:admin,web']);
+    Route::post('/setComplete/{id}', [UserWawancaraController::class , 'setComplete'])->name('user-nonapproved.setComplete')->middleware(['auth:admin,web']);
 });

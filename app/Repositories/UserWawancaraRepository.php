@@ -5,6 +5,7 @@ namespace App\Repositories;
 use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserWawancaraRepository
 {
@@ -67,5 +68,16 @@ class UserWawancaraRepository
 
         $usersWawancara->update($input);
         return $usersWawancara;
+    }
+
+    public function setComplete(Request $request, $id)
+    {
+        $users = User::find($id);
+        $users->update([
+            'status_wawancara' => 'SUDAH WAWANCARA',
+            'wawancara_by' => Auth::user()->email
+        ]);
+
+        return $users;
     }
 }

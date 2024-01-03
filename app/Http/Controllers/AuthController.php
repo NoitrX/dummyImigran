@@ -79,6 +79,8 @@ class AuthController extends Controller
                         return redirect()->intended('/direktur');
                     } elseif ($admin->level == 'admin') {
                         return redirect()->intended('/users');
+                    }elseif($admin->level == 'pewawancara') {
+                        return redirect()->intended('/users-wawancara');
                     }
                 }
             }

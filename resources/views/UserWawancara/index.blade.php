@@ -79,9 +79,88 @@
     </div>
   </div>
 
+  <div class="modal fade " id="modalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel"> LengkapI Data PMI WAWANCARA</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="" id="editDataForm" method="POST">
+                @csrf
+                <input type="hidden" name="id" id="userId" value="">
+                <div class="col-lg-12 col-sm-12 col-12">
+                  <div class="form-group">
+                      <label>Tinggi Badan <span style="color: red">*</span> </label>
+                      <input type="number" value="" class="form-control" id="tinggi_badan" placeholder="Tinggi Badan" name="tinggi_badan">
+                  </div>
+              </div>
+
+              <div class="col-lg-12 col-sm-12 col-12">
+                <div class="form-group">
+                    <label>Berat Badan <span style="color: red">*</span> </label>
+                    <input type="number" value="" class="form-control" id="berat_badan" placeholder="Berat Badan" name="berat_badan">
+                </div>
+            </div>
+
+            <div class="col-lg-12 col-sm-6 col-12">
+              <div class="form-group">
+                  <label>Negara <span style="color: red">*</span> </label>
+                  <select name="negara" class="form-control" id="negara">
+                      <option >---- Pilih Negara -------</option>
+                      <option value="ARAB SAUDI">ARAB SAUDI</option>
+                      <option value="TAIWAN">TAIWAN</option>
+                      <option value="JEPANG">JEPANG</option>
+                      <option value="KUWAIT">KUWAIT</option>
+                      <option value="MALAYSIA">MALAYSIA</option>
+                      <option value="BRUNEI DARUSSALAM">BRUNEI DARUSSALAM</option>
+                      <option value="SINGAPURA">SINGAPURA</option>
+                      <option value="BAHREN">BAHREN</option>
+                  </select>
+              </div>
+          </div>
+
+          <div class="col-lg-12 col-sm-6 col-12">
+            <div class="form-group">
+            <label>Jabatan <span style="color: red">*</span> </label>
+            <select name="jabatan" class="form-select" id="jataban">
+                <option >------Pilih Jabatan --------</option>
+                <option value="HOUSE MAID">HOUSE MAID</option>
+                <option value="NANNY">NANNY</option>
+                <option value="HOUSE KEEPER AND FAMILY COOK">HOUSE KEEPER AND FAMILY COOK</option>
+                <option value="NURSE">NURSE</option>
+            </select>
+            </div>
+            </div>
+
+            <div class="col-lg-12 col-sm-6 col-12 mt-1">
+              <div class="form-group">
+              <label>Pendidikan <span style="color: red">*</span> </label>
+              <select name="pendidikan" class="form-select" id="pendidikan"> 
+                  <option >----PILIH PENDIDIKAN -------</option>
+                  <option value="SD">SD</option>
+                  <option value="SMP">SMP</option>
+                  <option value="SMA">SMA</option>
+                  <option value="PERGURUAN_TINGGI">PERGURUAN_TINGGI</option>
+                  <option value="TIDAK_SEKOLAH">TIDAK_SEKOLAH</option>
+              </select>
+              </div>
+              </div>
+          
+      
+            
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+    </form>
+    </div>
+    </div>
+  </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
 
@@ -137,11 +216,11 @@
            render: function (data, type, row) {
              console.log('ini row',row)
              var deleteUrl = "{{ url('/api/users-nonapproved/delete')}}"
-             var approveUrl = "{{ url('/api/users-nonapproved/setComplete')}}"
+             var approveUrl = "{{ url('/api/users-wawancara/setComplete')}}"
              var btn = `<div class="d-flex">
-                            <a class="btn btn-info btn-sm text-white rounded-0 mx-1 detailed"  href="">
-                                <i class="fas fa-edit"></i> 
-                            </a>
+                           <button type="button" data-id="${row.id}" class="btn btn-info btn-sm rounded-0 edit-button" data-bs-toggle="modal"  data-bs-target="#modalEdit">
+                              <i class="fas fa-edit"></i>
+                          </button>
 
                             <form action="${approveUrl}/${row.id}" id="complete-form" class="mx-1 complete-form" method="POST">
                                 @csrf
@@ -372,6 +451,33 @@
         })
     })
 
+    $(document).on('click', '.edit-button', function(e) {
+        var userId = $(this).data("id");
+        var formEdit = $('#editDataForm');
+        var myUrl =  `/api/users-wawancara/update/${userId}`;
+        $.ajax({
+          url: `/api/users-wawancara/edit/${userId}`,
+          method: "GET",
+          dataType: "json",
+          success: function(response) {
+            console.log('inires', response)
+            var saranaData = response.data
+
+            $('#userId').val(saranaData.id)
+            $('#tinggi_badan').val(saranaData.tinggi_badan)
+            $('#berat_badan').val(saranaData.berat_badan)
+            $('#negara').val(saranaData.negara)
+            $('#jabatan').val(saranaData.jabatan)
+            $('#pendidikan').val(saranaData.pendidikan)
+            formEdit.attr('action', myUrl )
+            $("#modalEdit").modal("show");
+          },
+          error: function(xhr,status,error) {
+            console.error(xhr)
+          }
+        })
+    })
+
     $(document).ready(function() {
           $('#complete-form').submit(function(e) {
             e.preventDefault();
@@ -394,6 +500,44 @@
           })
         })
        
+
+        $(document).ready(function() {
+      $('#editDataForm').submit(function(e) {
+        e.preventDefault();
+        var newFormEdit = new FormData(this);
+
+        $.ajax({
+          url: $(this).attr('action'),
+          type: 'POST',
+          data: newFormEdit,
+          processData: false,
+          contentType: false,
+          success: function(response) {
+            $('#modalEdit').modal('hide');
+            $('#editDataForm')[0].reset();
+            iziToast.success({
+                  title: 'Sukses',
+                        message: 'Data Updated Successfully!!.',
+                        position: 'topRight',
+                });
+          loadTableData()
+          },
+          error: function(xhr,status,error) {
+            console.error(xhr);
+                    var errorMessage = 'Error:';
+                    $.each(xhr.responseJSON.errors, function(key, value) {
+                        errorMessage += '\n- ' + value;
+                    });
+
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'Form wajib Diisi!',
+                        position: 'topRight',
+                    });
+          }
+        })
+      })
+    })
       
    $(document).on('click', '.delete-btn', function (e) {
         e.preventDefault();

@@ -159,7 +159,7 @@
            render: function (data, type, row) {
              console.log('ini row',row)
              var getUrlStore = "{{ url('users/store') }}";
-             var getUrlDetail = "{{ url('users/') }}";
+             var getUrlDetail = "{{ url('users-nonapproved/') }}";
              var deleteUrl = "{{ url('api/users/delete')}}"
              var approveUrl = "{{ url('/api/users/setComplete')}}"
              var btn = `<div class="d-flex">

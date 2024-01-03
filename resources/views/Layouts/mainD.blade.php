@@ -15,7 +15,7 @@
 
         <!-- preloader css -->
         <link rel="stylesheet" href="{{asset('assets/css/preloader.min.css')}}" type="text/css" />
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css" />
         <!-- Bootstrap Css -->
         <link href="{{ asset('assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
         <!-- Icons Css -->
@@ -104,19 +104,36 @@
                         <div class="collapse navbar-collapse" id="topnav-menu-content">
                             <ul class="navbar-nav">
 
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle arrow-none" href="{{ route('direktur.index')}}" id="topnav-dashboard" role="button">
-                                        <i data-feather="home"></i><span data-key="t-dashboards">Dashboard</span>
-                                    </a>
-                                </li>
+                              
 
 
-
+                            @if(Auth()->user()->level === 'pewawancara')
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle arrow-none" href="{{ route('logout')}}" role="button">
                                         <i data-feather="settings"></i><span data-key="t-horizontal">Logout</span>
                                     </a>
                                 </li>
+                           
+
+                            @elseif(Auth()->user()->level === 'direktur')
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle arrow-none" href="{{ route('direktur.index')}}" id="topnav-dashboard" role="button">
+                                    <i data-feather="home"></i><span data-key="t-dashboards">Dashboard</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle arrow-none" href="{{ route('user-nonapproved.index')}}" id="topnav-dashboard" role="button">
+                                    <i data-feather="users"></i><span data-key="t-dashboards">Users Non Approved</span>
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle arrow-none" href="{{ route('logout')}}" role="button">
+                                    <i data-feather="settings"></i><span data-key="t-horizontal">Logout</span>
+                                </a>
+                            </li>
+                          
+                            @endif
 
                             </ul>
                         </div>

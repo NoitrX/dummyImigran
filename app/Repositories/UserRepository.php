@@ -72,11 +72,6 @@ class userRepository {
                 return response()->json(['error' => 'User not Found'], 404);
             }
             $input = [
-               'tinggi_badan' => $request->tinggi_badan,
-               'berat_badan' => $request->berat_badan,
-               'negara' => $request->negara,
-               'jabatan' => $request->jabatan,
-               'pendidikan' => $request->pendidikan,
                'data_medical_id' => $request->data_medical_id,
                'doc_kk' => $request->doc_kk,
                'doc_akta' => $request->doc_akta,

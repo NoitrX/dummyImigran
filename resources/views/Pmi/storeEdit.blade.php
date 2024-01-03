@@ -12,48 +12,7 @@
 <div class="card">
     <div class="card-body">
         <div class="row">
-            <div class="col-lg-3 col-sm-6 col-12">
-    <div class="form-group">
-    <label>Tinggi Badan <span style="color: red">*</span> </label>
-    <input type="text" name="tinggi_badan" class="form-control" value="{{$users->tinggi_badan}}" placeholder="Masukan Tinggi Badan" value="{{ old('tinggi_badan')}}" autocomplete="off">
-    </div>
-    </div>
-    <div class="col-lg-3 col-sm-6 col-12">
-    <div class="form-group">
-    <label>Berat Badan <span style="color: red">*</span> </label>
-    <input type="text" class="form-control" value="{{$users->berat_badan}}" placeholder="Masukan Berat Badan" name="berat_badan">
-    </div>
-    </div>
-
-    <div class="col-lg-3 col-sm-6 col-12">
-        <div class="form-group">
-            <label>Negara <span style="color: red">*</span> </label>
-            <select name="negara" class="form-control" id="">
-                <option value="{{$users->negara}}">{{$users->negara}}</option>
-                <option value="ARAB SAUDI">ARAB SAUDI</option>
-                <option value="TAIWAN">TAIWAN</option>
-                <option value="JEPANG">JEPANG</option>
-                <option value="KUWAIT">KUWAIT</option>
-                <option value="MALAYSIA">MALAYSIA</option>
-                <option value="BRUNEI DARUSSALAM">BRUNEI DARUSSALAM</option>
-                <option value="SINGAPURA">SINGAPURA</option>
-                <option value="BAHREN">BAHREN</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="col-lg-3 col-sm-6 col-12">
-        <div class="form-group">
-        <label>Jabatan <span style="color: red">*</span> </label>
-        <select name="jabatan" class="form-control" id="">
-            <option value="{{$users->jabatan}}">{{$users->jabatan}}</option>
-            <option value="HOUSE MAID">HOUSE MAID</option>
-            <option value="NANNY">NANNY</option>
-            <option value="HOUSE KEEPER AND FAMILY COOK">HOUSE KEEPER AND FAMILY COOK</option>
-            <option value="NURSE">NURSE</option>
-        </select>
-        </div>
-        </div>
+            
 
         <div class="col-lg-3 col-sm-6 col-12">
             <div class="form-group">
@@ -66,20 +25,6 @@
             </select>
             </div>
             </div>
-    
-    <div class="col-lg-3 col-sm-6 col-12 mt-1">
-    <div class="form-group">
-    <label>Pendidikan <span style="color: red">*</span> </label>
-    <select name="pendidikan" class="form-control" id="">
-        <option value="{{$users->pendidikan}}">{{$users->pendidikan}}</option>
-        <option value="SD">SD</option>
-        <option value="SMP">SMP</option>
-        <option value="SMA">SMA</option>
-        <option value="PERGURUAN_TINGGI">PERGURUAN_TINGGI</option>
-        <option value="TIDAK_SEKOLAH">TIDAK_SEKOLAH</option>
-    </select>
-    </div>
-    </div>
 
     <div class="col-lg-3 col-sm-6 col-12 mt-1">
         <div class="form-group">
@@ -179,7 +124,7 @@
         </div>
     </div>
     </div>
-    <div class="col-lg-3 col-sm-6 col-12 mt-2">
+    <div class="col-lg-6 col-sm-6 col-12 mt-2">
         <div class="form-group">
         <label>Pasport </label>
         <input type="file" value="{{$users->pasport}}" class="form-control" name="pasport" id="pasportInput">

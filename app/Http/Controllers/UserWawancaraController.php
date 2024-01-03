@@ -57,7 +57,11 @@ class UserWawancaraController extends Controller
     public function updateApi(Request $request, $id)
     {   
         $validatedData = Validator::make($request->all(), [
-            'email' => 'required',
+            'tinggi_badan' => 'required',
+            'berat_badan' => 'required',
+            'negara' => 'required',
+            'jabatan' => 'required',
+            'pendidikan' => 'required',
         ]);
         if($validatedData->fails()) {
             return response()->json([
@@ -72,6 +76,19 @@ class UserWawancaraController extends Controller
              'code' => 201,
              'message' => 'success',
             ]);
+        }catch(Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage(),
+                'status' => 500 
+            ], 500);
+        }
+    }
+    
+    public function setComplete(Request $request, $id)
+    {
+        try {
+            $dataId = $this->userWawancaraRepository->setComplete($request, $id);
+            return back()->with('success', 'PMI TELAH DIWAWANCARA!.');
         }catch(Exception $e) {
             return response()->json([
                 'error' => $e->getMessage(),

@@ -76,4 +76,12 @@ class UserNonApproveController extends Controller
             ], 500);
         }
     }
+
+    public function detailId($id)
+    {
+ 
+       $userId = $this->nonApproveRepository->getId($id);
+ 
+       return view('direktur.detailPmi', compact('userId'));
+    }
 }

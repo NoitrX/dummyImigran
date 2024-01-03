@@ -1,7 +1,7 @@
-@extends('Layouts.main')
+@extends('Layouts.mainD')
 @section('title', 'Non Approved User | PMI')
 
-@section('content')
+@section('sections')
 <div class="row">
     <div class="col-12">
       <div class="page-title-box d-sm-flex align-items-center justify-content-between">
@@ -138,6 +138,7 @@
              console.log('ini row',row)
              var deleteUrl = "{{ url('/api/users-nonapproved/delete')}}"
              var approveUrl = "{{ url('/api/users-nonapproved/setComplete')}}"
+             var getUrlDetail = "{{ url('users-nonapproved/') }}";
              var btn = `<div class="d-flex">
 
                             <form action="${approveUrl}/${row.id}" id="complete-form" class="mx-1 complete-form" method="POST">
@@ -146,7 +147,9 @@
                                   <i class="fa-solid fa-check"></i>
                                 </button>
                              </form>
-                           
+                             <a class="btn btn-primary btn-sm text-white rounded-0 mx-1" href="${getUrlDetail}/${row.id}">
+                             <i class="fas fa-eye"></i>
+                           </a>
                            <form action="${deleteUrl}/${row.id}" class="mx-1 delete-form" method="POST">
                              @method('delete')
                              @csrf

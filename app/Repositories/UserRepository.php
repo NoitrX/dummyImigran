@@ -458,7 +458,8 @@ class userRepository {
             'status_akun' => 'non_approved',
             'negara' => $request->negara,
             'provinsi' => $request->provinsi,
-            'domisili_id' => $request->domisili
+            'domisili_id' => $request->domisili,
+            'buku_nikah' => $request->buku_nikah
         ];
 
         if (!empty($input['tanggal_lahir'])) {
@@ -472,33 +473,40 @@ class userRepository {
 
         if($request->hasFile('foto')) {
             $foto = $request->file('foto');
-            $nama_foto = time() . rand(1,9) . '.' .$foto->getClientOriginalExtension();
+            $nama_foto = time() . rand(1,976) . '.ft.' .$foto->getClientOriginalExtension();
             $foto->move('uploads', $nama_foto);
             $input['foto'] = $nama_foto;
         }
         if($request->hasFile('doc_ktp')) {
             $doc_ktp = $request->file('doc_ktp');
-            $nama_ktp = time() . rand(1,2) . '.' .$doc_ktp->getClientOriginalExtension();
+            $nama_ktp = time() . rand(1,24) . '.ktp.' .$doc_ktp->getClientOriginalExtension();
             $doc_ktp->move('uploads', $nama_ktp);
             $input['doc_ktp'] = $nama_ktp;
         }
+
+        if($request->hasFile('buku_nikah')) {
+            $buku_nikah = $request->file('buku_nikah');
+            $namaBukuNikah = time() . rand(1,454) . '.bkn.' .$buku_nikah->getClientOriginalExtension();
+            $buku_nikah->move('uploads', $namaBukuNikah);
+            $input['buku_nikah'] = $nama_ktp;
+        }
         if($request->hasFile('doc_surat_izin')) {
             $doc_surat_izin = $request->file('doc_surat_izin');
-            $nama_surat_izin = time() . rand(1,8) . '.' .$doc_surat_izin->getClientOriginalExtension();
+            $nama_surat_izin = time() . rand(1,185) . '.sI.' .$doc_surat_izin->getClientOriginalExtension();
             $doc_surat_izin->move('uploads', $nama_surat_izin);
             $input['doc_surat_izin'] = $nama_surat_izin;
         }
 
         if($request->hasFile('doc_kk')) {
             $doc_kk = $request->file('doc_kk');
-            $namaKK = time() . rand(1,25) . '.' .$doc_kk->getClientOriginalExtension();
+            $namaKK = time() . rand(1,258) . '.kk.' .$doc_kk->getClientOriginalExtension();
             $doc_kk->move('uploads', $namaKK);
             $input['doc_kk'] = $namaKK;
         }
       
         if($request->hasFile('doc_akta')) {
             $doc_akta = $request->file('doc_akta');
-            $namaAkta = time() . rand(1,13) . '.' .$doc_akta->getClientOriginalExtension();
+            $namaAkta = time() . rand(1,132) . '.akta.' .$doc_akta->getClientOriginalExtension();
             $doc_akta->move('uploads', $namaAkta);
             $input['doc_akta'] = $namaAkta;
         }

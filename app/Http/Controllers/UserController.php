@@ -178,90 +178,22 @@ class UserController extends Controller
 
         $pdfMerger = new PDFMerger();
 
-     
-        $bpjsDoc = public_path("uploads/{$user->bpjs}");
-        if (file_exists($bpjsDoc)) {
-            $pdfMerger->addPDF($bpjsDoc, 'all');
-        }
+  
+        $filesToMerge = ['bpjs', 'pp', 'pasport', 'tiket', 'pk', 'visa', 'ektkln', 'ijazah', 'doc_ktp', 'doc_surat_izin', 'surat_nikah', 'medical', 'bnsp', 'doc_akta', 'doc_kk', 'buku_nikah'];
+
+        foreach ($filesToMerge as $document) {
+            $documentPath = public_path("uploads/{$user->{$document}}");
 
         
-        $ppDoc = public_path("uploads/{$user->pp}");
-        if (file_exists($ppDoc)) {
-            $pdfMerger->addPDF($ppDoc, 'all');
+            if ($user->{$document} && file_exists($documentPath)) {
+                $pdfMerger->addPDF($documentPath, 'all');
+            }
         }
 
-       
-        $pasportDoc = public_path("uploads/{$user->pasport}");
-        if (file_exists($pasportDoc)) {
-            $pdfMerger->addPDF($pasportDoc, 'all');
-        }
-
-        $tiketDoc = public_path("uploads/{$user->tiket}");
-        if (file_exists($tiketDoc)) {
-            $pdfMerger->addPDF($tiketDoc, 'all');
-        }
-
-        $pkDoc = public_path("uploads/{$user->pk}");
-        if (file_exists($pkDoc)) {
-            $pdfMerger->addPDF($pkDoc, 'all');
-        }
-
-        $visaDoc = public_path("uploads/{$user->visa}");
-        if (file_exists($visaDoc)) {
-            $pdfMerger->addPDF($visaDoc, 'all');
-        }
-        $ektklnDoc = public_path("uploads/{$user->ektkln}");
-        if (file_exists($ektklnDoc)) {
-            $pdfMerger->addPDF($ektklnDoc, 'all');
-        }
-
-        $ijazahDoc = public_path("uploads/{$user->ijazah}");
-        if (file_exists($ijazahDoc)) {
-            $pdfMerger->addPDF($ijazahDoc, 'all');
-        }
-
-        $ktpDoc = public_path("uploads/{$user->doc_ktp}");
-        if (file_exists($ktpDoc)) {
-            $pdfMerger->addPDF($ktpDoc, 'all');
-        }
-
-        $suratIzinDoc = public_path("uploads/{$user->doc_surat_izin}");
-        if (file_exists($suratIzinDoc)) {
-            $pdfMerger->addPDF($suratIzinDoc, 'all');
-        }
-
-        $suratNikahDoc = public_path("uploads/{$user->surat_nikah}");
-        if (file_exists($suratNikahDoc)) {
-            $pdfMerger->addPDF($suratNikahDoc, 'all');
-        }
-
-        $medicalDoc = public_path("uploads/{$user->medical}");
-        if (file_exists($medicalDoc)) {
-            $pdfMerger->addPDF($medicalDoc, 'all');
-        }
-
-        $bnspDoc = public_path("uploads/{$user->bnsp}");
-        if (file_exists($bnspDoc)) {
-            $pdfMerger->addPDF($bnspDoc, 'all');
-        }
-
-        $aktaDoc = public_path("uploads/{$user->doc_akta}");
-        if (file_exists($aktaDoc)) {
-            $pdfMerger->addPDF($aktaDoc, 'all');
-        }
-
-        
-        $kkDoc = public_path("uploads/{$user->doc_kk}");
-        if (file_exists($kkDoc)) {
-            $pdfMerger->addPDF($kkDoc, 'all');
-        }
-        
         $mergedPdfPath = public_path("uploads/merged/{$user->name}_merged.pdf");
 
-      
         $pdfMerger->merge('file', $mergedPdfPath);
 
-        
         return response()->download($mergedPdfPath, "{$user->name}_merged.pdf");
 
     } catch (Exception $e) {

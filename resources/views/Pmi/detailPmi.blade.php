@@ -57,6 +57,7 @@
             <p><span class="label fw-bold">No KK :</span> <span class="value">{{$userId->no_kk}}</span></p>
             <p><span class="label fw-bold">Medical :</span> <span class="value"> {{ $userId->saranaKesehatan->nama_sarana ?? 'Data Kosong' }}</span></p>
             <p><span class="label fw-bold">Status Medical :</span> <span class="value"> {{ $userId->status_medical }}</span></p>
+            <p><span class="label fw-bold">Buku Nikah :</span> <span class="value"> {{ $userId->buku_nikah }}</span></p>
      
         </div>
             <div class="col-lg-12 text-center mt-5">
@@ -214,10 +215,34 @@
                   </a>
                 </div>
             </div>
+
+            <div class="col-lg-12 mt-3 mb-3">
+              <label for="">Buku Nikah</label>
+                <div class="d-flex">
+                  <input type="text" class="form-control" value="{{$userId->buku_nikah}}">
+                  <a href="{{ route('download.bpjs', ['id' => $userId->id, 'document'=> 'buku_nikah']) }}" id="downloadBpjsBtn" class="btn btn-primary btn-sm">
+                    <i class="fas fa-download"></i>
+                  </a>
+                </div>
+            </div>
+       
             <p class="text-center text-danger">Sebelum Menyatukan Document Harap lengkapi Data terlebih Dahulu!</p>
-            <a href="{{ route('download.merged.pdf', ['id' => $userId->id]) }}" class="btn btn-primary btn-sm">
+            <a href="{{ route('download.merged.pdf', ['id' => $userId->id]) }}" class="btn btn-primary btn-sm {{ areFilesUploaded($userId) ? '' : 'disabled' }}" >
               <i class="fas fa-download"></i> DOWNLOAD DOCUMENT
           </a>
+          @php
+        function areFilesUploaded($user) {
+            $requiredDocuments = ['bpjs', 'pp', 'pasport', 'tiket', 'pk', 'visa', 'ektkln', 'ijazah', 'doc_ktp', 'doc_surat_izin', 'surat_nikah', 'medical', 'bnsp', 'doc_akta', 'doc_kk'];
+
+            foreach ($requiredDocuments as $document) {
+                if ($user->{$document} === null) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        @endphp
           </div>
          
         </div>

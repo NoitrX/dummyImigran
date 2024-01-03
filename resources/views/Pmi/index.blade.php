@@ -226,7 +226,7 @@
             </div>
               <div class="col-md-6 mb-2">
                   <label for="" class="form-label">No KK</label>
-                  <input type="number" name="no_kk" value="{{ old('no_kk') }}" class="form-control rounded-0 @error('no_kk') is-invalid @enderror"  placeholder="Isi Nomor KK">
+                  <input type="number" name="no_kk" value="{{ old('no_kk') }}" maxlength = "16" oninput="maxLengthCheck(this)" onkeypress="return isNumeric(event)" min="1" max="9999999999999999" class="form-control rounded-0 @error('no_kk') is-invalid @enderror"  placeholder="Isi Nomor KK">
                   @error('no_kk')
                   <div class=" detailed_text">{{ $message }}</div>
               @enderror
@@ -234,7 +234,7 @@
   
               <div class="col-md-6 mb-2">
                   <label for="" class="form-label"> No NIK(NO KTP)</label>
-                  <input type="number" name="no_nik" value="{{ old('no_nik') }}" placeholder="Isi Nomor KTP " class="form-control rounded-0 @error('no_nik') is-invalid @enderror" >
+                  <input type="number" name="no_nik" value="{{ old('no_nik') }}" maxlength = "16" oninput="maxLengthCheck(this)" onkeypress="return isNumeric(event)" min="1" max="9999999999999999" placeholder="Isi Nomor KTP " class="form-control rounded-0 @error('no_nik') is-invalid @enderror" >
                   @error('no_nik')
                   <div class="text-danger detailed_text">{{ $message }}</div>
               @enderror
@@ -262,7 +262,7 @@
               </div>
               <div class="col-md-6 mb-2">
                   <label for="" class="form-label">Status Menikah</label>
-                  <select name="status_menikah" class="form-control rounded-0 @error('status_menikah') is-invalid @enderror"  >
+                  <select name="status_menikah" id="status_menikah" class="form-control rounded-0 @error('status_menikah') is-invalid @enderror"  >
                       <option value="hidden">------ Pilih Opsi -----</option>
                       <option value="menikah">Menikah</option>
                       <option value="belom_menikah">Belum Menikah</option>
@@ -272,6 +272,14 @@
                   <div class="text-danger detailed_text">{{ $message }}</div>
               @enderror
               </div>
+
+              <div class="col-md-12 mb-2" id="fileInputContainer" style="display: none;">
+                <label for="" class="form-label"> Buku Nikah <span class="text-danger">(FORMAT PDF)</span>   </label>
+                <input type="file" name="buku_nikah" class="form-control rounded-0 @error('buku_nikah') is-invalid @enderror">
+                @error('buku_nikah')
+                    <div class="text-danger detailed_text">{{ $message }}</div>
+                @enderror
+            </div>
               <div class="col-md-6 mb-2">
                   <label for="" class="form-label">Upload SCAN KTP</label>
                   <input type="file" name="doc_ktp" class="form-control rounded-0 @error('doc_ktp') is-invalid @enderror" >
@@ -690,6 +698,7 @@
             });
         });
 
+        
 
         $(document).ready(function () {
             $.ajaxSetup({
@@ -758,7 +767,33 @@
    
  });
  
+ $(document).ready(function() {
+    $('#status_menikah').change(function() {
+        var selectedValue = $(this).val();
+        var fileInputContainer = $('#fileInputContainer');
+
+        if (selectedValue === 'menikah') {
+            fileInputContainer.show();
+        } else {
+            fileInputContainer.hide();
+        }
+    });
+});
  
- 
+function maxLengthCheck(object) {
+    if (object.value.length > object.maxLength)
+      object.value = object.value.slice(0, object.maxLength)
+  }
+    
+  function isNumeric (evt) {
+    var theEvent = evt || window.event;
+    var key = theEvent.keyCode || theEvent.which;
+    key = String.fromCharCode (key);
+    var regex = /[0-9]|\./;
+    if ( !regex.test(key) ) {
+      theEvent.returnValue = false;
+      if(theEvent.preventDefault) theEvent.preventDefault();
+    }
+  }
  </script>
 @endsection

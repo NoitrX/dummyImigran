@@ -205,9 +205,10 @@
               </div>
           </div>
 
+
         
 
-          <div class="col-lg-12 col-sm-6 col-12 mt-1">
+            <div class="col-lg-12 col-sm-6 col-12 mt-1">
               <div class="form-group">
               <label>Pendidikan <span style="color: red">*</span> </label>
               <select name="pendidikan" class="form-select" id="pendidikan"> 
@@ -220,26 +221,24 @@
               </select>
               </div>
               </div>
+          
+          <div class="col-lg-6 col-sm-6 col-12">
+            <div class="form-group">
+                  <label>STATUS TKI <span style="color: red">*</span> </label>
+                  <select name="status_tki" class="form-control" id="status_tki">
+                      <option >---- Pilih Status TKI -------</option>
+                      <option value="EX">EX</option>
+                      <option value="NON">NON</option>
+                  </select>
+              </div>
           </div>
 
-          <div class="col-lg-12 col-sm-6 col-12 mt-1">
+          <div class="col-lg-6 col-sm-6 col-12">
             <div class="form-group">
-            <label>STATUS TKI <span style="color: red">*</span> </label>
-            <select name="status_tki" class="form-select" id="status_tki"> 
-                <option >----PILIH STATUS -------</option>
-                <option value="EX">EX</option>
-                <option value="NON">NON</option>
-
-            </select>
-            </div>
-            </div>
-        </div>
-
-          <div class="col-lg-12 col-sm-6 col-12 mt-1">
-            <div class="form-group">
-              <label for="">Keterangan</label>
-              <textarea name="keterangan" class="form-control" id="" cols="30" rows="10"></textarea>
-            </div>
+                  <label>Keterangan <span style="color: red">*</span> </label>
+                 <textarea name="keterangan" class="form-control" id="keterangan" cols="30" rows="5"></textarea>
+              </div>
+          </div>
           </div>
             
         </div>

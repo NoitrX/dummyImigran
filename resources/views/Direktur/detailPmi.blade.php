@@ -51,6 +51,7 @@
               <p><span class="label fw-bold">Status Penerbangan :</span> <span class="value"> {{ $userId->status_penerbangan }}</span></p>
               <p><span class="label fw-bold">Domisili :</span> <span class="value"> {{ $userId->regency->name }}</span></p>
               <p><span class="label fw-bold">Disnaker :</span> <span class="value"> {{ $userId->provinsi }}</span></p>
+              <p><span class="label fw-bold">Status TKI :</span> <span class="value"> {{ $userId->status_tki }}</span></p>
           </div>
 
           <div class="col-lg-3 mt-4 detailed">
@@ -66,6 +67,8 @@
             <p><span class="label fw-bold">Medical :</span> <span class="value"> {{ $userId->saranaKesehatan->nama_sarana ?? 'Data Kosong' }}</span></p>
             <p><span class="label fw-bold">Status Medical :</span> <span class="value"> {{ $userId->status_medical }}</span></p>
             <p><span class="label fw-bold">Buku Nikah :</span> <span class="value"> {{ $userId->buku_nikah }}</span></p>
+            <p><span class="label fw-bold">Keterangan :</span> <span class="value"> {{ $userId->keterangan }}</span></p>
+       
      
       
           </div>

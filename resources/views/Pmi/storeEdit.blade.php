@@ -200,7 +200,7 @@
     <div class="col-lg-6 col-sm-6 col-12 mt-2">
         <div class="form-group">
             <label> Status <span style="color: red">*</span> </label>
-                <select class="form-control" name="status">
+                <select class="form-control" name="status" id="status_user">
                     <option value="{{$users->status}}">{{$users->status}}</option>
                     <option value="MEDICAL">MEDICAL</option>
                     <option value="BLK">BLK</option>
@@ -224,7 +224,7 @@
     <div class="col-lg-6 col-sm-6 col-12 mt-2">
         <div class="form-group">
             <label> TOTAL BIAYA <span style="color: red"></span> </label>
-            <input type="text" class="form-control" name="total_biaya">
+            <input type="text" class="form-control" name="total_harga">
             @error('senpai_id')
             <div class="text-danger"></div>
             @enderror
@@ -302,6 +302,33 @@
                    
                 }
             });
+        });
+        
+    });
+
+    $(document).ready(function(){
+        // Set the initial total harga value
+        var initialTotalHarga = null;
+
+        // Set the initial value when the page loads
+        $('input[name="total_harga"]').val(initialTotalHarga);
+
+        // Update the total harga when the status changes
+        $('#status_user').on('change', function(){
+            var selectedStatus = $(this).val();
+
+            // Set the total harga based on the selected status
+            switch(selectedStatus) {
+                case 'MEDICAL':
+                    $('input[name="total_harga"]').val(1300000);
+                    break;
+                case 'BLK':
+                    $('input[name="total_harga"]').val(3700000);
+                    break;
+                default:
+                    // Set a default value or leave it empty if no match
+                    $('input[name="total_harga"]').val(null);
+            }
         });
     });
 

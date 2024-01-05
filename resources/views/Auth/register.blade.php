@@ -110,7 +110,7 @@
           
             <div class="col-md-6 mb-2">
                 <label for="" class="form-label">Provinsi</label>
-               <input type="text" class="form-control rounded-0" id="provinsi" name="provinsi">
+               <input type="text" class="form-control rounded-0" id="provinsi" name="provinsi" placeholder="Provinsi">
                 @error('provinsi')
                 <div class=" detailed_text">{{ $message }}</div>
             @enderror

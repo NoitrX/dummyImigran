@@ -19,7 +19,6 @@
           <h4 class="card-title">DETAIL PMI</h4>
           <div class="d-flex justify-content-between">
             <p class="card-title-desc">Berikut ini adalah Detail dari PMI</p>
-            <p class="text-danger fw-bold" style="font-size: 11px">Klik Text Dokumen untuk Melihat Dokumen!</p>
             
           </div>
          

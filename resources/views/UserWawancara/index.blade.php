@@ -222,7 +222,7 @@
               </div>
               </div>
           
-          <div class="col-lg-6 col-sm-6 col-12">
+          <div class="col-lg-12 col-sm-6 col-12">
             <div class="form-group">
                   <label>STATUS TKI <span style="color: red">*</span> </label>
                   <select name="status_tki" class="form-control" id="status_tki">
@@ -233,7 +233,7 @@
               </div>
           </div>
 
-          <div class="col-lg-6 col-sm-6 col-12">
+          <div class="col-lg-12 col-sm-6 col-12">
             <div class="form-group">
                   <label>Keterangan <span style="color: red">*</span> </label>
                  <textarea name="keterangan" class="form-control" id="keterangan" cols="30" rows="5"></textarea>

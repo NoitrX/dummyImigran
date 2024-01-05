@@ -12,7 +12,7 @@
 <div class="card">
     <div class="card-body">
         <div class="row">
-            <div class="col-lg-12 col-sm-6 col-12">
+            <div class="col-lg-12 col-sm-6 col-12 mb-3">
                 <div class="form-group">
                     <label>Jabatan <span style="color: red">*</span> </label>
                     <select name="jabatan" class="form-select" id="jataban">
@@ -175,7 +175,7 @@
         </div>
     </div>
     </div>
-    <div class="col-lg-4 col-sm-6 col-12 mt-2">
+    <div class="col-lg-6 col-sm-6 col-12 mt-2">
         <div class="form-group">
         <label>TIKET </label>
         <input type="file" value="{{$users->tiket}}" class="form-control" name="tiket" id="tiketInput">
@@ -186,7 +186,7 @@
         </div>
     </div>
     </div>
-    <div class="col-lg-4 col-sm-6 col-12 mt-2">
+    <div class="col-lg-6 col-sm-6 col-12 mt-2">
         <div class="form-group">
         <label>EKTKLN </label>
         <input type="file" value="{{$users->ektkln}}" class="form-control" name="ektkln" id="ektklnInput">
@@ -197,25 +197,50 @@
         </div>
     </div>
     </div>
-    <div class="col-lg-4 col-sm-6 col-12 mt-2">
-    <div class="form-group">
-    <label> Status <span style="color: red">*</span> </label>
-    <select class="form-control" name="status">
-    <option value="{{$users->status}}">{{$users->status}}</option>
-    <option value="medical">Medical</option>
-    <option value="blkln">blkln</option>
-    <option value="rekompassport">rekompassport</option>
-    <option value="basmah">basmah</option>
-    <option value="kbsa">kbsa</option>
-    <option value="visa">VISA</option>
-    <option value="opp">OPP</option>
-   
-    </select>
-    @error('senpai_id')
-    <div class="text-danger"></div>
-    @enderror
+    <div class="col-lg-6 col-sm-6 col-12 mt-2">
+        <div class="form-group">
+            <label> Status <span style="color: red">*</span> </label>
+                <select class="form-control" name="status">
+                    <option value="{{$users->status}}">{{$users->status}}</option>
+                    <option value="MEDICAL">MEDICAL</option>
+                    <option value="BLK">BLK</option>
+                    <option value="REKOM">REKOM</option>
+                    <option value="PASPOR">PASPOR</option>
+                    <option value="ASURANSI">ASURANSI</option>
+                    <option value="ENJAZ">ENJAZ</option>
+                    <option value="BASMAH">BASMAH</option>
+                    <option value="APOSTILE">APOSTILE</option>
+                    <option value="WAKALAH">WAKALAH</option>
+                    <option value="VISA">VISA</option>
+                    <option value="OPP">OPP</option>
+                    <option value="TIKET">TIKET</option>
+                </select>
+            @error('senpai_id')
+            <div class="text-danger"></div>
+            @enderror
+        </div>
     </div>
+
+    <div class="col-lg-6 col-sm-6 col-12 mt-2">
+        <div class="form-group">
+            <label> TOTAL BIAYA <span style="color: red"></span> </label>
+            <input type="text" class="form-control" name="total_biaya">
+            @error('senpai_id')
+            <div class="text-danger"></div>
+            @enderror
+        </div>
     </div>
+
+    <label class="mt-3"> Handle Status <span style="color: red">*</span> </label>
+    <div class="col-lg-4 ">
+        <div class="form-group">
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+            </label>
+        </div>
+    </div>
+
     
     <div class="col-lg-12 mt-4 d-flex justify-content-center">
     <button type="submit" class="btn btn-primary rounded-0 me-2">Submit</button>

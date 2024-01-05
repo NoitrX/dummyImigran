@@ -58,10 +58,10 @@ class dashboardRepository {
         $blkln = User::where('status', '=', 'blkln')->count();
         $rekompassport  = User::where('status', '=', 'rekompassport')->count();
         $sudahTerbang = User::where('status_penerbangan', '=', 'terbang')->count();
-        $belumTerbang = User::where('status_penerbangan', '=', 'belum_terbang')->count();
+        $belumTerbang = User::where('status_penerbangan', '=', 'belum_terbang')->where('status_akhir', '=', 'selesai')->count();
         $pmiFit = User::where('status_medical', '=', 'fit')->count();
         $nonFit = User::where('status_medical', '=', 'non_fit')->count();
-        $nonApproved = User::where('status_akun', '=', 'non_approved')->count();
+        $nonApproved = User::where('status_akun', '=', 'non_approved')->where('status_wawancara', '=', 'SUDAH WAWANCARA')->count();
 
         return [
             'medicalUsers' => $medicalUsers,

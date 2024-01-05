@@ -86,7 +86,7 @@
                 <select name="tempat_lahir"  class="form-select tempat_lahir rounded-0" id="tempat_lahir">
                     <option >Pilih Tempat Lahir</option>
                     @foreach ($regency as $item)
-                        <option value="{{$item->id}}">{{$item->name}}</option>
+                        <option value="{{$item->name}}">{{$item->name}}</option>
                     @endforeach
                 </select>
                 @error('tempat_lahir')

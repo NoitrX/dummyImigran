@@ -9,11 +9,22 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('auth/style.css')}}">
     <link href="{{ asset('assets/css/me.css')}}" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/css/select2.min.css" rel="stylesheet" />
+
 
    <style>
         .image {
             text-align: center;
         }
+        .select2-container {
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            padding: 5px 0
+        }
+        .select2-dropdown {
+            border: 1px solid rgba(0, 0, 0, 0.2);
+
+        }
+        
     </style>
 </head>
 <body>
@@ -73,7 +84,7 @@
             <div class="col-md-6 mb-2">
                 <label for="" class="form-label">Tempat Lahir</label>
                 <select name="tempat_lahir"  class="form-select tempat_lahir rounded-0" id="tempat_lahir">
-                    <option >Pilih Domisili</option>
+                    <option >Pilih Tempat Lahir</option>
                     @foreach ($regency as $item)
                         <option value="{{$item->id}}">{{$item->name}}</option>
                     @endforeach
@@ -85,7 +96,7 @@
 
             <div class="col-md-6 mb-2">
                 <label for="" class="form-label">Domisili</label>
-                <select name="domisili" style="border: 1px solid black" class="form-select domisili " id="domisili">
+                <select name="domisili"  class="form-select domisili " id="domisili">
                     <option value="">Pilih Domisili</option>
                     @foreach ($regency as $item)
                         <option value="{{$item->id}}">{{$item->name}}</option>
@@ -99,7 +110,7 @@
           
             <div class="col-md-6 mb-2">
                 <label for="" class="form-label">Provinsi</label>
-               <input type="text" class="form-control" id="provinsi" name="provinsi">
+               <input type="text" class="form-control rounded-0" id="provinsi" name="provinsi">
                 @error('provinsi')
                 <div class=" detailed_text">{{ $message }}</div>
             @enderror
@@ -277,6 +288,8 @@ function maxLengthCheck(object) {
         $(document).ready(function () {
             $('#domisili').select2({
                 containerCssClass: 'custom-select2-container',
+                theme: 'bootstrap',
+                dropdownCssClass: 'custom-select2-dropdown',
       
             });
         });
@@ -285,6 +298,8 @@ function maxLengthCheck(object) {
         $(document).ready(function () {
             $('#tempat_lahir').select2({
                 containerCssClass: 'custom-select2-container',
+                theme: 'bootstrap',
+                dropdownCssClass: 'custom-select2-dropdown',
       
             });
         });

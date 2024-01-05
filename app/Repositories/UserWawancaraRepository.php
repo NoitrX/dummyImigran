@@ -74,6 +74,9 @@ class UserWawancaraRepository
             'negara' => $request->negara,
             'pendidikan' => $request->pendidikan,
             'tanggal_wawancara' => Carbon::now(),
+            'keterangan' => $request->keterangan,
+            'status_tki' => $request->status_tki
+
         ];
 
         $usersWawancara->update($input);

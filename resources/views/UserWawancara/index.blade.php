@@ -207,7 +207,7 @@
 
         
 
-            <div class="col-lg-12 col-sm-6 col-12 mt-1">
+          <div class="col-lg-12 col-sm-6 col-12 mt-1">
               <div class="form-group">
               <label>Pendidikan <span style="color: red">*</span> </label>
               <select name="pendidikan" class="form-select" id="pendidikan"> 
@@ -220,8 +220,26 @@
               </select>
               </div>
               </div>
-          
-            
+          </div>
+
+          <div class="col-lg-12 col-sm-6 col-12 mt-1">
+            <div class="form-group">
+            <label>STATUS TKI <span style="color: red">*</span> </label>
+            <select name="status_tki" class="form-select" id="status_tki"> 
+                <option >----PILIH STATUS -------</option>
+                <option value="EX">EX</option>
+                <option value="NON">NON</option>
+
+            </select>
+            </div>
+            </div>
+        </div>
+
+          <div class="col-lg-12 col-sm-6 col-12 mt-1">
+            <div class="form-group">
+              <label for="">Keterangan</label>
+              <textarea name="keterangan" class="form-control" id="" cols="30" rows="10"></textarea>
+            </div>
           </div>
             
         </div>
@@ -578,6 +596,8 @@
             $('#no_telp').val(saranaData.no_telp)
             $('#negara').val(saranaData.negara)
             $('#pendidikan').val(saranaData.pendidikan)
+            $('#status_tki').val(saranaData.status_tki)
+            $('#keterangan').val(saranaData.keterangan)
             formEdit.attr('action', myUrl )
             $("#modalEdit").modal("show");
           },

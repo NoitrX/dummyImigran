@@ -72,6 +72,7 @@ class userRepository {
                 return response()->json(['error' => 'User not Found'], 404);
             }
             $input = [
+                'jabatan' => $request->jabatan,
                'data_medical_id' => $request->data_medical_id,
                'doc_kk' => $request->doc_kk,
                'doc_akta' => $request->doc_akta,
@@ -454,7 +455,7 @@ class userRepository {
             'negara' => $request->negara,
             'provinsi' => $request->provinsi,
             'domisili_id' => $request->domisili,
-            'buku_nikah' => $request->buku_nikah
+            'buku_nikah' => $request->buku_nikah,
         ];
 
         if (!empty($input['tanggal_lahir'])) {
@@ -504,6 +505,13 @@ class userRepository {
             $namaAkta = time() . rand(1,132) . '.akta.' .$doc_akta->getClientOriginalExtension();
             $doc_akta->move('uploads', $namaAkta);
             $input['doc_akta'] = $namaAkta;
+        }
+
+        if($request->hasFile('ijazah')) {
+            $ijazah = $request->file('ijazah');
+            $namaIjazah = time() . rand(1,123) . '.ijz.' .$ijazah->getClientOriginalExtension();
+            $ijazah->move('uploads', $namaIjazah);
+            $input['ijazah'] = $namaIjazah;
         }
 
         $users = User::create($input);

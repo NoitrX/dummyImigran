@@ -12,6 +12,18 @@
 <div class="card">
     <div class="card-body">
         <div class="row">
+            <div class="col-lg-12 col-sm-6 col-12">
+                <div class="form-group">
+                <label>Jabatan <span style="color: red">*</span> </label>
+                <select name="jabatan" class="form-select" id="jataban">
+                    <option >------Pilih Jabatan --------</option>
+                    <option value="HOUSE MAID">HOUSE MAID</option>
+                    <option value="NANNY">NANNY</option>
+                    <option value="HOUSE KEEPER AND FAMILY COOK">HOUSE KEEPER AND FAMILY COOK</option>
+                    <option value="NURSE">NURSE</option>
+                </select>
+                </div>
+                </div>
             
 
         <div class="col-lg-3 col-sm-6 col-12">
@@ -22,6 +34,7 @@
                 <option value="==||==">==||==</option>
                 <option value="fit">FIT</option>
                 <option value="non_fit">NON FIT</option>
+                <option value="pending">PENDING</option>
             </select>
             </div>
             </div>

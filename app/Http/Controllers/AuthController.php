@@ -130,6 +130,7 @@ class AuthController extends Controller
             'foto' => 'required|mimes:png,jpg,jpeg|max:3072',
             'doc_kk' => 'required|mimes:pdf|max:3072',
             'doc_akta' => 'required|mimes:pdf|max:3072',
+            'buku_nikah' => 'mimes:pdf|max:3072',
             'alamat' => 'required',   
           
 

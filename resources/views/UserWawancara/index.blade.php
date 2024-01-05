@@ -80,7 +80,7 @@
   </div>
 
   <div class="modal fade " id="modalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-xl">
     <div class="modal-content">
         <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel"> LengkapI Data PMI WAWANCARA</h1>
@@ -90,21 +90,105 @@
             <form action="" id="editDataForm" method="POST">
                 @csrf
                 <input type="hidden" name="id" id="userId" value="">
-                <div class="col-lg-12 col-sm-12 col-12">
-                  <div class="form-group">
-                      <label>Tinggi Badan <span style="color: red">*</span> </label>
-                      <input type="number" value="" class="form-control" id="tinggi_badan" placeholder="Tinggi Badan" name="tinggi_badan">
-                  </div>
+                <div class="row">
+
+             
+                <div class="col-md-4 mb-2">
+                  <label for="namaLengkap" class="form-label" >Nama Lengkap</label>
+                  <input type="text" name="name" value="{{ old('name') }}" class="form-control rounded-0 @error('name') is-invalid @enderror" id="namaLengkap" placeholder="Isi Nama Lengkap" autocomplete="off">
+                  @error('name')
+                  <div class=" detailed_text">{{ $message }}</div>
+              @enderror
+              </div>
+  
+              <div class="col-md-4 mb-2">
+                  <label for="namaLengkap" class="form-label" >Nama Ayah</label>
+                  <input type="text" name="nama_bapak" value="{{ old('nama_bapak') }}" class="form-control rounded-0 @error('nama_bapak') is-invalid @enderror" id="namaBapak" placeholder="Isi Nama Bapak" autocomplete="off">
+                  @error('nama_bapak')
+                  <div class=" detailed_text">{{ $message }}</div>
+              @enderror
               </div>
 
-              <div class="col-lg-12 col-sm-12 col-12">
-                <div class="form-group">
-                    <label>Berat Badan <span style="color: red">*</span> </label>
-                    <input type="number" value="" class="form-control" id="berat_badan" placeholder="Berat Badan" name="berat_badan">
-                </div>
+              <div class="col-md-4 mb-2">
+                <label for="namaLengkap" class="form-label" >Tinggi Badan</label>
+                <input type="text" name="tinggi_badan" value="{{ old('tinggi_badan') }}" id="tinggi_badan" class="form-control rounded-0 @error('tinggi_badan') is-invalid @enderror" placeholder="Isi Tinggi badan" autocomplete="off">
+                @error('tinggi_badan')
+                <div class=" detailed_text">{{ $message }}</div>
+            @enderror
             </div>
 
-            <div class="col-lg-12 col-sm-6 col-12">
+            <div class="col-md-4 mb-2">
+              <label for="namaLengkap" class="form-label" >Berat Badan</label>
+              <input type="text" name="berat_badan" value="{{ old('berat_badan') }}" id="berat_badan" class="form-control rounded-0 @error('berat_badan') is-invalid @enderror" placeholder="Isi Berat Badan" autocomplete="off">
+              @error('berat_badan')
+              <div class=" detailed_text">{{ $message }}</div>
+          @enderror
+          </div>
+              <div class="col-md-4 mb-2">
+                  <label for="" class="form-label">Email</label>
+                  <input type="text" name="email" value="{{ old('email') }}" id="email" class="form-control rounded-0 @error('email') is-invalid @enderror"  placeholder="Isi Alamat Email" autocomplete="off">
+                  @error('email')
+                  <div class=" detailed_text">{{ $message }}</div>
+              @enderror
+              </div>
+              <div class="col-md-4 mb-2">
+                  <label for="" class="form-label">Tanggal Lahir</label>
+                  <input type="date" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" id="tanggal_lahir" class="form-control rounded-0 @error('tanggal_lahir') is-invalid @enderror"  placeholder="Isi Alamat Email">
+                  @error('tanggal_lahir')
+                  <div class=" detailed_text">{{ $message }}</div>
+              @enderror
+              </div>
+              <div class="col-md-6 mb-2">
+                  <label for="" class="form-label">Tempat Lahir</label>
+                  <input type="text" name="tempat_lahir" class="form-control" id="tempats_lahir">
+                  @error('tempat_lahir')
+                  <div class=" detailed_text">{{ $message }}</div>
+              @enderror
+              </div>
+  
+              <div class="col-md-6 mb-2">
+                  <label for="" class="form-label">Domisili</label>
+                  <select name="domisili_id" class="form-control domisili " id="domisili">
+                      @foreach ($regency as $item)
+                          <option value="{{$item->id}}">{{$item->name}}</option>
+                      @endforeach
+                  </select>
+                  @error('domisili')
+                  <div class=" detailed_text">{{ $message }}</div>
+              @enderror
+              </div>
+  
+            
+              <div class="col-md-6 mb-2">
+                  <label for="" class="form-label">Provinsi</label>
+                 <input type="text" class="form-control" id="provinsi" name="provinsi"  >
+                  @error('provinsi')
+                  <div class=" detailed_text">{{ $message }}</div>
+              @enderror
+              </div>
+              <div class="col-md-6 mb-2">
+                  <label for="" class="form-label">Agama</label>
+                  <select name="agama" class="form-select rounded-0 " id="agama">
+                      <option value="ISLAM">ISLAM</option>
+                      <option value="KRISTEN">KRISTEN</option>
+                      <option value="KATOLIK">KATOLIK</option>
+                      <option value="BUDDHA">BUDDHA</option>
+                      <option value="HINDU">HINDU</option>
+                      <option value="KONGHUCHU">KONGHUCHU</option>
+                  </select>
+                  @error('agama')
+                  <div class=" detailed_text">{{ $message }}</div>
+              @enderror
+              </div>
+              <div class="col-md-6 mb-2">
+                  <label for="" class="form-label">No Telp</label>
+                  <input type="number" name="no_telp" value="{{ old('no_telp') }}" id="no_telp" class="form-control rounded-0 @error('no_telp') is-invalid @enderror"  placeholder="Isi Nomor Telepon" autocomplete="off">
+                  @error('no_telp')
+                  <div class=" detailed_text">{{ $message }}</div>
+              @enderror
+              </div>
+
+            <div class="col-lg-6 col-sm-6 col-12">
               <div class="form-group">
                   <label>Negara <span style="color: red">*</span> </label>
                   <select name="negara" class="form-control" id="negara">
@@ -121,18 +205,7 @@
               </div>
           </div>
 
-          <div class="col-lg-12 col-sm-6 col-12">
-            <div class="form-group">
-            <label>Jabatan <span style="color: red">*</span> </label>
-            <select name="jabatan" class="form-select" id="jataban">
-                <option >------Pilih Jabatan --------</option>
-                <option value="HOUSE MAID">HOUSE MAID</option>
-                <option value="NANNY">NANNY</option>
-                <option value="HOUSE KEEPER AND FAMILY COOK">HOUSE KEEPER AND FAMILY COOK</option>
-                <option value="NURSE">NURSE</option>
-            </select>
-            </div>
-            </div>
+        
 
             <div class="col-lg-12 col-sm-6 col-12 mt-1">
               <div class="form-group">
@@ -148,7 +221,8 @@
               </div>
               </div>
           
-      
+            
+          </div>
             
         </div>
         <div class="modal-footer">
@@ -163,6 +237,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script>
   var downloadKtp = "{{ route('download.bpjs', ['id' => ':id', 'document' => 'doc_ktp']) }}";
@@ -241,7 +317,7 @@
            },
          },
          { data: 'name', render:function(data,type,row) {
-          var combinedInfo = row.name + ' Binti ' + row.nama_bapak;
+          var combinedInfo = row.name + ' BINTI ' + row.nama_bapak;
           return combinedInfo
          } },
          { data: 'regency.name' },
@@ -450,6 +526,31 @@
            
         })
     })
+  
+
+    $(document).ready(function () {
+            $.ajaxSetup({
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+            });
+
+            $('#domisili').change(function (e) {
+                console.log(e.target.value);
+                var selectedRegencyId = $(this).val();
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/getProvince/' + selectedRegencyId,
+                    success: function (data) {
+                        console.log(data.province)
+                        $('#provinsi').val(data.province);
+                    },
+                    error: function (error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+        });
+
 
     $(document).on('click', '.edit-button', function(e) {
         var userId = $(this).data("id");
@@ -464,10 +565,18 @@
             var saranaData = response.data
 
             $('#userId').val(saranaData.id)
+
+            $('#namaLengkap').val(saranaData.name)
+            $('#namaBapak').val(saranaData.nama_bapak)
             $('#tinggi_badan').val(saranaData.tinggi_badan)
             $('#berat_badan').val(saranaData.berat_badan)
+            $('#email').val(saranaData.email)
+            $('#tanggal_lahir').val(saranaData.tanggal_lahir)
+            $('#tempats_lahir').val(saranaData.tempat_lahir)
+            $('#domisili').val(saranaData.domisili_id);
+            $('#provinsi').val(saranaData.provinsi)
+            $('#no_telp').val(saranaData.no_telp)
             $('#negara').val(saranaData.negara)
-            $('#jabatan').val(saranaData.jabatan)
             $('#pendidikan').val(saranaData.pendidikan)
             formEdit.attr('action', myUrl )
             $("#modalEdit").modal("show");

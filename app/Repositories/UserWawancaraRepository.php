@@ -52,7 +52,7 @@ class UserWawancaraRepository
 
     public function editApi($id)
     {
-        $editId = User::find($id);
+        $editId = User::with('regency')->findOrFail($id);
         return $editId;
     }
 
@@ -60,10 +60,18 @@ class UserWawancaraRepository
     {
         $usersWawancara = User::where('id', $id)->first();
         $input = [
+            'name' => $request->name,
+            'nama_bapak' => $request->nama_bapak,
+            'email' => $request->email,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'tempat_lahir' => $request->tempat_lahir,
+            'domisili_id' => $request->domisili_id,
+            'provinsi' => $request->provinsi,
+            'agama' => $request->agama,
+            'no_telp' => $request->no_telp,
             'tinggi_badan' => $request->tinggi_badan,
             'berat_badan' => $request->berat_badan,
             'negara' => $request->negara,
-            'jabatan' => $request->jabatan,
             'pendidikan' => $request->pendidikan,
             'tanggal_wawancara' => Carbon::now(),
         ];

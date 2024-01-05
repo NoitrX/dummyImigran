@@ -60,6 +60,7 @@ class UserController extends Controller
    {
 
       $validator = Validator::make($request->all(), [
+        'jabatan' => 'required',
          'ijazah' => 'mimes:pdf|max:3072',
          'surat_nikah' => 'mimes:pdf|max:3072',
          'medical' => 'mimes:pdf|max:3072',

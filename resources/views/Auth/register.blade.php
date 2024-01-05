@@ -72,7 +72,12 @@
             </div>
             <div class="col-md-6 mb-2">
                 <label for="" class="form-label">Tempat Lahir</label>
-                <input type="text" name="tempat_lahir" value="{{ old('tempat_lahir') }}" class="form-control rounded-0 @error('tempat_lahir') is-invalid @enderror"  placeholder="Tempat Lahir">
+                <select name="tempat_lahir"  class="form-select tempat_lahir rounded-0" id="tempat_lahir">
+                    <option >Pilih Domisili</option>
+                    @foreach ($regency as $item)
+                        <option value="{{$item->id}}">{{$item->name}}</option>
+                    @endforeach
+                </select>
                 @error('tempat_lahir')
                 <div class=" detailed_text">{{ $message }}</div>
             @enderror
@@ -80,7 +85,7 @@
 
             <div class="col-md-6 mb-2">
                 <label for="" class="form-label">Domisili</label>
-                <select name="domisili" class="form-select domisili rounded-0" id="domisili">
+                <select name="domisili" style="border: 1px solid black" class="form-select domisili " id="domisili">
                     <option value="">Pilih Domisili</option>
                     @foreach ($regency as $item)
                         <option value="{{$item->id}}">{{$item->name}}</option>
@@ -145,7 +150,7 @@
             </div>
             <div class="col-md-6 mb-2">
                 <label for="" class="form-label">Pendidikan</label>
-                <select name="pendidikan" class="form-select  rounded-0 @error('pendidikan') is-invalid @enderror" >
+                <select name="pendidikan" class="form-select  rounded-0 @error('pendidikan') is-invalid @enderror" id="pendidikan" >
                     <option value="hidden">------ Pilih Opsi -----</option>
                     <option value="SD">SD</option>
                     <option value="SMP">SMP</option>
@@ -156,6 +161,8 @@
                 <div class="text-danger detailed_text">{{ $message }}</div>
             @enderror
             </div>
+
+       
 
             <div class="col-md-6 mb-2">
                 <label for="" class="form-label">Negara</label>
@@ -269,7 +276,16 @@ function maxLengthCheck(object) {
   }
         $(document).ready(function () {
             $('#domisili').select2({
-                containerCssClass: 'custom-select2-container'
+                containerCssClass: 'custom-select2-container',
+      
+            });
+        });
+
+
+        $(document).ready(function () {
+            $('#tempat_lahir').select2({
+                containerCssClass: 'custom-select2-container',
+      
             });
         });
 
@@ -297,7 +313,7 @@ function maxLengthCheck(object) {
             });
         });
 
-        $(document).ready(function() {
+$(document).ready(function() {
     $('#status_menikah').change(function() {
         var selectedValue = $(this).val();
         var fileInputContainer = $('#fileInputContainer');
@@ -309,6 +325,10 @@ function maxLengthCheck(object) {
         }
     });
 });
+
+
+
+
     </script>
 </body>
 </html>

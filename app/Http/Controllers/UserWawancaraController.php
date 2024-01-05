@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use App\Models\Regency;
+use App\Models\Province;
 use Illuminate\Http\Request;
-use App\Repositories\UserWawancaraRepository;
 use Illuminate\Support\Facades\Validator;
+use App\Repositories\UserWawancaraRepository;
+
 class UserWawancaraController extends Controller
 {
     private $userWawancaraRepository;
@@ -15,8 +18,9 @@ class UserWawancaraController extends Controller
        $this->userWawancaraRepository = $userWawancaraRepository;
    }
     public function index()
-    {
-        return view('UserWawancara.index');
+    {  $province = Province::all();
+        $regency = Regency::all();
+        return view('UserWawancara.index', compact('regency', 'province'));
     }
 
     public function indexApi(Request $request)
@@ -60,7 +64,6 @@ class UserWawancaraController extends Controller
             'tinggi_badan' => 'required',
             'berat_badan' => 'required',
             'negara' => 'required',
-            'jabatan' => 'required',
             'pendidikan' => 'required',
         ]);
         if($validatedData->fails()) {

@@ -249,7 +249,7 @@
               </div>
               <div class="col-md-6 mb-2">
                   <label for="" class="form-label">Pendidikan</label>
-                  <select name="pendidikan" class="form-control rounded-0 @error('pendidikan') is-invalid @enderror" >
+                  <select name="pendidikan" class="form-control rounded-0 @error('pendidikan') is-invalid @enderror" id="pendidikan">
                       <option value="hidden">------ Pilih Opsi -----</option>
                       <option value="SD">SD</option>
                       <option value="SMP">SMP</option>
@@ -260,6 +260,8 @@
                   <div class="text-danger detailed_text">{{ $message }}</div>
               @enderror
               </div>
+
+           
               <div class="col-md-6 mb-2">
                   <label for="" class="form-label">Status Menikah</label>
                   <select name="status_menikah" id="status_menikah" class="form-control rounded-0 @error('status_menikah') is-invalid @enderror"  >
@@ -433,7 +435,7 @@
          {
             data: 'name',
             render: function (data, type, row) {
-            var combinedInfo = row.name + ' Binti ' + row.nama_bapak;
+            var combinedInfo = row.name + ' BINTI ' + row.nama_bapak;
              var textColor = row.status_medical === 'non_fit' ? 'red' : (row.status_medical === 'fit' ? 'green' : ''); 
              return '<span style="color:' + textColor + '">' + combinedInfo + '</span>';
           }
@@ -779,6 +781,8 @@
         }
     });
 });
+
+
  
 function maxLengthCheck(object) {
     if (object.value.length > object.maxLength)

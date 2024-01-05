@@ -162,7 +162,7 @@
            },
          },
          { data: 'name', render:function(data,type,row) {
-          var combinedInfo = row.name + ' Binti ' + row.nama_bapak;
+          var combinedInfo = row.name + ' BINTI ' + row.nama_bapak;
           return combinedInfo
          } },
          { data: 'tempat_lahir' },

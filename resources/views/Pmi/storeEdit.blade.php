@@ -224,22 +224,24 @@
     <div class="col-lg-6 col-sm-6 col-12 mt-2">
         <div class="form-group">
             <label> TOTAL BIAYA <span style="color: red"></span> </label>
-            <input type="text" class="form-control" name="total_harga">
-            @error('senpai_id')
+            <input type="text" value="{{$users->total_harga}}" class="form-control" name="total_harga">
+            @error('total_harga')
             <div class="text-danger"></div>
             @enderror
         </div>
     </div>
 
     <label class="mt-3"> Handle Status <span style="color: red">*</span> </label>
-    <div class="col-lg-4 ">
+    <div class="col-lg-4">
         <div class="form-group">
             <label class="switch">
-                <input type="checkbox">
+                <input type="checkbox" {{ $users->handle_status ? 'checked' : ''}}>
                 <span class="slider round"></span>
             </label>
+            <input type="hidden" name="handle_status" value="{{ $users->handle_status ? 'checked' : ''}}">
         </div>
     </div>
+    
 
     
     <div class="col-lg-12 mt-4 d-flex justify-content-center">
@@ -267,7 +269,7 @@
       
             var formData = new FormData(this);
 
-            // Send the AJAX request
+        
             $.ajax({
                 url: $(this).attr('action'),
                 type: 'POST',
@@ -306,32 +308,98 @@
         
     });
 
+  
+
     $(document).ready(function(){
-        // Set the initial total harga value
-        var initialTotalHarga = null;
+    var initialTotalHarga = {{$users->total_harga}};
 
-        // Set the initial value when the page loads
-        $('input[name="total_harga"]').val(initialTotalHarga);
-
-        // Update the total harga when the status changes
-        $('#status_user').on('change', function(){
-            var selectedStatus = $(this).val();
-
-            // Set the total harga based on the selected status
-            switch(selectedStatus) {
-                case 'MEDICAL':
-                    $('input[name="total_harga"]').val(1300000);
-                    break;
-                case 'BLK':
-                    $('input[name="total_harga"]').val(3700000);
-                    break;
-                default:
-                    // Set a default value or leave it empty if no match
-                    $('input[name="total_harga"]').val(null);
-            }
-        });
+    $('input[name="total_harga"]').val(initialTotalHarga);
+    var handleStatus = '{{$users->handle_status}}';
+    if (handleStatus === 'checked') {
+        $('input[type="checkbox"]').prop('checked', true);
+    } else {
+        $('input[type="checkbox"]').prop('checked', false);
+    }
+    $('#status_user').on('change', function(){
+        updateTotalHarga();
     });
 
+
+    $('input[type="checkbox"]').on('change', function () {
+        var isChecked = $(this).prop('checked');
+        
+     
+        $('input[name="handle_status"]').val(isChecked ? 'checked' : 'unchecked');
+        
+   
+        if (!isChecked) {
+            $('input[name="handle_status"]').hide();
+        }
+
+        updateTotalHarga();
+    });
+
+    function updateTotalHarga() {
+        var selectedStatus = $('#status_user').val();
+        var totalHarga = 0;
+
+        switch(selectedStatus) {
+            case 'MEDICAL':
+                totalHarga = 1300000;
+                break;
+            case 'BLK':
+                totalHarga = 3700000;
+                break;
+            case 'REKOM' :
+                totalHarga = 4100000
+                break;
+            case 'PASPOR' :
+            totalHarga =4700000 
+                break;
+            case 'ASURANSI' :
+                  totalHarga =5700000
+                break;
+            case 'ENJAZ' :
+                  totalHarga =6700000
+                break;
+            case 'BASMAH' :
+                   totalHarga =6900000
+                break;
+            case 'APOSTILE' :
+                   totalHarga =7700000
+                break;
+            case 'WAKALAH' :
+                  totalHarga =8700000
+                break;
+            case 'VISA' :
+                  totalHarga =9700000
+                break;
+            case 'OPP' :
+                  totalHarga =9900000
+                break;
+            case 'TIKET' :
+                  totalHarga =18400000
+                break;
+            default:
+                totalHarga = null;
+        }
+
+     
+        if ($('input[type="checkbox"]').prop('checked')) {
+            totalHarga += 300000;
+        }
+
+        $('input[name="total_harga"]').val(totalHarga);
+    }
+
+    $('form').on('submit', function () {
+        if (!$('input[type="checkbox"]').prop('checked')) {
+            $('input[name="handle_status"]').val('unchecked');
+        }
+
+        return true;
+    });
+});
     // $(document).ready(function () {
     //     var selectedFileName = "{{$users->ijazah}}";
     //     $('#selectedFileName').text(selectedFileName);

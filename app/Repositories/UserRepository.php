@@ -89,6 +89,8 @@ class userRepository {
                'status' => $request->status,
                'status_medical' => $request->status_medical,
                'tiket' => $request->tiket,
+               'total_harga' => $request->total_harga,
+               'handle_status' => $request->handle_status,
               
             ];
             if($request->hasFile('medical')) {
@@ -456,6 +458,7 @@ class userRepository {
             'provinsi' => $request->provinsi,
             'domisili_id' => $request->domisili,
             'buku_nikah' => $request->buku_nikah,
+           
         ];
 
         if (!empty($input['tanggal_lahir'])) {
@@ -512,6 +515,10 @@ class userRepository {
             $namaIjazah = time() . rand(1,123) . '.ijz.' .$ijazah->getClientOriginalExtension();
             $ijazah->move('uploads', $namaIjazah);
             $input['ijazah'] = $namaIjazah;
+        }
+
+        if ($input['usia'] < 23) {
+            return back()->withErrors(['usia' => 'User must be at least 23 years old to register.']);
         }
 
         $users = User::create($input);

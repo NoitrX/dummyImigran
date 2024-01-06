@@ -4,7 +4,11 @@
 <div class="row">
     <div class="col-12">
       <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-        <h4 class="mb-sm-0 font-size-18">DETAIL PMI</h4>
+        <div class="d-flex">
+          <a href="{{route('user.index')}}" class="me-3"> <i class="fas fa-arrow-left"></i></a>
+          <h4 class="mb-sm-0 font-size-18">DETAIL PMI</h4>
+        </div>
+     
       </div>
     </div>
   </div>
@@ -15,6 +19,7 @@
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">DETAIL PMI</h4>
+          
           <div class="d-flex justify-content-between">
             <p class="card-title-desc">Berikut ini adalah Detail dari PMI</p>
             <p class="text-danger fw-bold" style="font-size: 11px">Klik Text Dokumen untuk Melihat Dokumen!</p>
@@ -26,6 +31,13 @@
           <div class="row">
             <div class="col-lg-12 text-center mt-5">
               <h3 class="fw-bold mb-3 detailed">DATA PMI</h3>
+            </div>
+            <div class="d-flex justify-content-end">
+              <div>
+                <h2 class="text-sm" style="font-size: 15px">Pewawancara : {{$userId->wawancara_by}}</h2>
+                <h2 class="text-sm" style="font-size: 15px">Tanggal Wawancara : {{$userId->tanggal_wawancara}}</h2>
+              </div>
+              
             </div>
             <div class="col-lg-6 d-flex justify-content-center mt-4">
                 <img width="80%"  src="{{ asset('uploads/'.$userId->foto)}}" alt="">

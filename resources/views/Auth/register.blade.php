@@ -76,22 +76,14 @@
             </div>
             <div class="col-md-6 mb-2">
                 <label for="" class="form-label">Tanggal Lahir</label>
-                <input type="date" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" class="form-control rounded-0 @error('tanggal_lahir') is-invalid @enderror"  placeholder="Isi Alamat Email">
+                <input type="date" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" class="form-control rounded-0 @error('tanggal_lahir') is-invalid @enderror"  placeholder="Isi Tanggal Lahir">
                 @error('tanggal_lahir')
                 <div class=" detailed_text">{{ $message }}</div>
             @enderror
             </div>
             <div class="col-md-6 mb-2">
                 <label for="" class="form-label">Tempat Lahir</label>
-                <select name="tempat_lahir"  class="form-select tempat_lahir rounded-0" id="tempat_lahir">
-                    <option >Pilih Tempat Lahir</option>
-                    @foreach ($regency as $item)
-                        <option value="{{$item->name}}">{{$item->name}}</option>
-                    @endforeach
-                </select>
-                @error('tempat_lahir')
-                <div class=" detailed_text">{{ $message }}</div>
-            @enderror
+                <input type="text" class="form-control" name="tempat_lahir" value="{{ old('tempat_lahir') }}" placeholder="Isi Tempat Lahir">
             </div>
 
             <div class="col-md-6 mb-2">
@@ -343,7 +335,15 @@ $(document).ready(function() {
 
 
 
-
+@if (session('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '{{ session('error') }}',
+        });
+    </script>
+@endif
     </script>
 </body>
 </html>

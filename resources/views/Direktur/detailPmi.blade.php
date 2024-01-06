@@ -5,7 +5,10 @@
 <div class="row">
     <div class="col-12">
       <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-        <h4 class="mb-sm-0 font-size-18">DETAIL PMI</h4>
+        <div class="d-flex">
+          <a href="{{route('user-nonapproved.index')}}" class="me-3"> <i class="fas fa-arrow-left"></i></a>
+          <h4 class="mb-sm-0 font-size-18">DETAIL PMI</h4>
+        </div>
     
       </div>
     </div>

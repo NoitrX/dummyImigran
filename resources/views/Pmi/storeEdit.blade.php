@@ -2,7 +2,11 @@
 @section('title', 'LENGKAPI | PMI')
 
 @section('content')
-<h4>ISI DATA PMI</h4>
+<div class="d-flex">
+    <a href="{{route('user.index')}}" class="me-3 mt-2"> <i class="fas fa-arrow-left"></i></a>
+    <h4>ISI DATA PMI</h4>
+  </div>
+
 <h6>LENGKAPI DATA PMI</h6>
 <p class="text-danger"> * Untuk Size Maximum dari File adalah 3MB , Kolom Bertanda * Artinya wajib Diisi</p>
 {{-- <p>{{ auth()->user()}} </p> --}}

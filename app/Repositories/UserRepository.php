@@ -518,7 +518,9 @@ class userRepository {
         }
 
         if ($input['usia'] < 23) {
-            return back()->withErrors(['usia' => 'User must be at least 23 years old to register.']);
+            return back()->withErrors(['usia' => 'Usia Yang Diperbolehkan Mendaftar hanya 23 Tahun Keatas']);
+        }else if($input['usia'] > 44) {
+            return back()->withErrors(['usia' => 'Usia Yang Diperbolehkan Mendaftar Maximal 44 Tahun ']);
         }
 
         $users = User::create($input);

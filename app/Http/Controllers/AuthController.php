@@ -63,7 +63,7 @@ class AuthController extends Controller
                         return redirect()->intended('/direktur');
                         return 'ini direktur';
                     } elseif ($user->level == 'admin') {
-                        return redirect()->intended('/users');
+                        return redirect()->intended('/dashboard');
                     }
                 }
             }

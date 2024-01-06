@@ -55,9 +55,7 @@
               <p><span class="label fw-bold">Disnaker :</span> <span class="value"> {{ $userId->provinsi }}</span></p>
               <p><span class="label fw-bold">Status TKI :</span> <span class="value"> {{ $userId->status_tki }}</span></p>
           </div>
-
           <div class="col-lg-3 mt-4 detailed">
-           
             <p><span class="label fw-bold">No Surat Izin :</span> <span class="value">{{$userId->no_surat_izin}}</span></p>
             <p><span class="label fw-bold">Status Menikah :</span> <span class="value">{{$userId->status_menikah}}</span></p>
             <p><span class="label fw-bold">Tinggi Badan : </span> <span class="value">{{$userId->tinggi_badan}}</span></p>
@@ -66,9 +64,6 @@
             <p><span class="label fw-bold">No Telp :</span> <span class="value">{{$userId->no_telp}}</span></p>
             <p><span class="label fw-bold">No KK :</span> <span class="value">{{$userId->no_kk}}</span></p>
             <p><span class="label fw-bold">Keterangan :</span> <span class="value"> {{ $userId->keterangan }}</span></p>
-       
-     
-      
           </div>
          
         </div>

@@ -66,6 +66,7 @@
     <script src="{{ asset('uth/js/main.js')}}"></script>
     <script>
       AOS.init();
+      
     </script>
   </body>
 </html>

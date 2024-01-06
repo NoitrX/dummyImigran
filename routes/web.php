@@ -41,14 +41,14 @@ Route::prefix('admin')->group(function() {
      Route::get('/', [AdminController::class, 'index'])->name('admin.index')->middleware(['auth:admin,web']);
 });
 
-Route::prefix('users')->group(function() {
-    Route::get('/', [UserController::class, 'index'])->name('user.index')->middleware(['auth:admin,web']);
-    Route::get('/store/{id}', [UserController::class, 'getId'])->name('user.getId')->middleware(['auth:admin,web']);
-    Route::get('/detail/{id}', [UserController::class, 'detail'])->name('user.detail')->middleware(['auth:admin,web']);
-    Route::get('/{id}', [UserController::class, 'detailId'])->name('user.detailId')->middleware(['auth:admin,web']);
-    Route::get('/download-document/{id}/{document}', [UserController::class, 'downloadBpjs'])->name('download.bpjs')->middleware(['auth:admin,web']);
-    Route::get('/download-merged-pdf/{id}', [UserController::class, 'downloadMergedPDF'])->name('download.merged.pdf')->middleware(['auth:admin,web']);
-    Route::post('/addData', [UserController::class, 'addData'])->name('user.addData')->middleware(['auth:admin,web']);
+Route::prefix('users')->middleware(['auth:admin,web', 'web'])->group(function() {
+    Route::get('/', [UserController::class, 'index'])->name('user.index');
+    Route::get('/store/{id}', [UserController::class, 'getId'])->name('user.getId');
+    Route::get('/detail/{id}', [UserController::class, 'detail'])->name('user.detail');
+    Route::get('/{id}', [UserController::class, 'detailId'])->name('user.detailId');
+    Route::get('/download-document/{id}/{document}', [UserController::class, 'downloadBpjs'])->name('download.bpjs');
+    Route::get('/download-merged-pdf/{id}', [UserController::class, 'downloadMergedPDF'])->name('download.merged.pdf');
+    Route::post('/addData', [UserController::class, 'addData'])->name('user.addData');
 });
 
 Route::get('/pmi-excel/{status}', [ExportController::class, 'exportNew'])->name('pmi.exportExcel')->middleware(['auth:admin,web']);

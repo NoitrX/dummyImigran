@@ -51,25 +51,20 @@
               <p><span class="label fw-bold">No KK :</span> <span class="value">{{$userId->no_kk}}</span></p>
               <p><span class="label fw-bold">No NIK :</span> <span class="value">{{$userId->no_nik}}</span></p>
               <p><span class="label fw-bold">Negara :</span> <span class="value">{{$userId->negara}}</span></p>
-              <p><span class="label fw-bold">Status Penerbangan :</span> <span class="value"> {{ $userId->status_penerbangan }}</span></p>
               <p><span class="label fw-bold">Domisili :</span> <span class="value"> {{ $userId->regency->name }}</span></p>
               <p><span class="label fw-bold">Disnaker :</span> <span class="value"> {{ $userId->provinsi }}</span></p>
               <p><span class="label fw-bold">Status TKI :</span> <span class="value"> {{ $userId->status_tki }}</span></p>
           </div>
 
           <div class="col-lg-3 mt-4 detailed">
-            <p><span class="label fw-bold">Jabatan :</span> <span class="value">{{$userId->jabatan}}</span></p>
+           
             <p><span class="label fw-bold">No Surat Izin :</span> <span class="value">{{$userId->no_surat_izin}}</span></p>
-            <p><span class="label fw-bold">Status :</span> <span class="value">{{$userId->status}}</span></p>
             <p><span class="label fw-bold">Status Menikah :</span> <span class="value">{{$userId->status_menikah}}</span></p>
             <p><span class="label fw-bold">Tinggi Badan : </span> <span class="value">{{$userId->tinggi_badan}}</span></p>
             <p><span class="label fw-bold">Berat Badan :</span> <span class="value">{{$userId->berat_badan}}</span></p>
             <p><span class="label fw-bold">Pendidikan :</span> <span class="value">{{$userId->pendidikan}}</span></p>
             <p><span class="label fw-bold">No Telp :</span> <span class="value">{{$userId->no_telp}}</span></p>
             <p><span class="label fw-bold">No KK :</span> <span class="value">{{$userId->no_kk}}</span></p>
-            <p><span class="label fw-bold">Medical :</span> <span class="value"> {{ $userId->saranaKesehatan->nama_sarana ?? 'Data Kosong' }}</span></p>
-            <p><span class="label fw-bold">Status Medical :</span> <span class="value"> {{ $userId->status_medical }}</span></p>
-            <p><span class="label fw-bold">Buku Nikah :</span> <span class="value"> {{ $userId->buku_nikah }}</span></p>
             <p><span class="label fw-bold">Keterangan :</span> <span class="value"> {{ $userId->keterangan }}</span></p>
        
      

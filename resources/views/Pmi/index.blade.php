@@ -453,7 +453,8 @@
          { data: 'status_medical' , render: function(data, type,row) {
           var combinedInfo = row.status_medical;
           var textColor = row.status_medical === 'non_fit' ? 'red' : (row.status_medical === 'fit' ? 'green' : (row.status_medical === 'pending' ? 'yellow' : ''));
-          return '<span style="color:' + textColor + '">' + combinedInfo + '</span>';
+          // return '<span style="color:' + textColor + '">' + combinedInfo + '</span>';
+          return '<div class="' + textColor + '">' + combinedInfo + '</div>';
          }},
          { data: 'regency.name' },
   

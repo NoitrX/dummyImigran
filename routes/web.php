@@ -61,15 +61,15 @@ Route::prefix('/api/users')->group(function() {
     Route::post('/setComplete/{id}', [UserController::class , 'setComplete'])->name('user.setComplete')->middleware(['auth:admin,web']);
 });
 
-Route::prefix('dashboard')->group(function() {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index')->middleware(['auth:admin,web']);
-    Route::get('/{type}/{status}', [DashboardController::class, 'indexGet'])->name('dashboard.indexGet')->middleware(['auth:admin,web']);
-    Route::get('/viewFilter/{type}/{status}', [DashboardController::class, 'viewFilter'])->name('dashboard.viewFilter')->middleware(['auth:admin,web']);
+Route::prefix('dashboard')->middleware(['auth:admin,web', 'web'])->group(function() {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/{type}/{status}', [DashboardController::class, 'indexGet'])->name('dashboard.indexGet');
+    Route::get('/viewFilter/{type}/{status}', [DashboardController::class, 'viewFilter'])->name('dashboard.viewFilter');
 });
 
-Route::prefix('users-nonapproved')->group(function() {
-    Route::get('/', [UserNonApproveController::class, 'index'])->name('user-nonapproved.index')->middleware(['auth:admin,web']);
-    Route::get('/{id}', [UserNonApproveController::class, 'detailId'])->name('user.detailId')->middleware(['auth:admin,web']);
+Route::prefix('users-nonapproved')->middleware(['auth:admin,web', 'web'])->group(function() {
+    Route::get('/', [UserNonApproveController::class, 'index'])->name('user-nonapproved.index');
+    Route::get('/{id}', [UserNonApproveController::class, 'detailId'])->name('user.detailId');
 });
 
 Route::prefix('/api/users-nonapproved')->group(function() {
@@ -79,8 +79,8 @@ Route::prefix('/api/users-nonapproved')->group(function() {
     Route::post('/setComplete/{id}', [UserNonApproveController::class , 'setComplete'])->name('user-nonapproved.setComplete')->middleware(['auth:admin,web']);
 });
 
-Route::prefix('sarana-kesehatan')->group(function() {
-    Route::get('/', [SaranaKesehatanController::class, 'index'])->name('sarana-kesehatan.index')->middleware(['auth:admin,web']);
+Route::prefix('sarana-kesehatan')->middleware(['auth:admin,web', 'web'])->group(function() {
+    Route::get('/', [SaranaKesehatanController::class, 'index'])->name('sarana-kesehatan.index');
 });
 
 
@@ -93,8 +93,8 @@ Route::prefix('/api/sarana-kesehatan')->group(function() {
     Route::post('/update/{id}', [SaranaKesehatanController::class, 'updateApi'])->name('sarana-kesehatan.updateApi')->middleware(['auth:admin,web']);
 });
 
-Route::prefix('users-selesai')->group(function() {
-    Route::get('/', [UserSelesaiController::class, 'index'])->name('user-selesai.index')->middleware(['auth:admin,web']);
+Route::prefix('users-selesai')->middleware(['auth:admin,web', 'web'])->group(function() {
+    Route::get('/', [UserSelesaiController::class, 'index'])->name('user-selesai.index');
 });
 
 Route::prefix('/api/users-selesai')->group(function() {
@@ -117,15 +117,15 @@ Route::prefix('/api/admin')->group(function() {
 
 
 
-Route::prefix('direktur')->group(function() {
-    Route::get('/', [DirekturController::class, 'index'])->name('direktur.index')->middleware(['auth:admin,web']);
-    Route::get('/{type}/{status}', [DirekturController::class, 'indexGet'])->name('direktur.indexGet')->middleware(['auth:admin,web']);
-    Route::get('/viewFilter/{type}/{status}', [DirekturController::class, 'viewFilter'])->name('direktur.viewFilter')->middleware(['auth:admin,web']);
+Route::prefix('direktur')->middleware(['auth:admin,web', 'web'])->group(function() {
+    Route::get('/', [DirekturController::class, 'index'])->name('direktur.index');
+    Route::get('/{type}/{status}', [DirekturController::class, 'indexGet'])->name('direktur.indexGet');
+    Route::get('/viewFilter/{type}/{status}', [DirekturController::class, 'viewFilter'])->name('direktur.viewFilter');
 });
 
 
-Route::prefix('users-wawancara')->group(function() {
-    Route::get('/', [UserWawancaraController::class, 'index'])->name('userWawancara.index')->middleware(['auth:admin,web']);
+Route::prefix('users-wawancara')->middleware(['auth:admin,web', 'web'])->group(function() {
+    Route::get('/', [UserWawancaraController::class, 'index'])->name('userWawancara.index');
 });
 
 

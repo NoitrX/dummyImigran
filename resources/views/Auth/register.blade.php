@@ -22,8 +22,10 @@
         }
         .select2-dropdown {
             border: 1px solid rgba(0, 0, 0, 0.2);
-
+            max-height: 400px; 
+            overflow-y: auto;
         }
+      
         
     </style>
 </head>
@@ -282,7 +284,7 @@ function maxLengthCheck(object) {
                 containerCssClass: 'custom-select2-container',
                 theme: 'bootstrap',
                 dropdownCssClass: 'custom-select2-dropdown',
-      
+                maximumInputLength: 5,
             });
         });
 
